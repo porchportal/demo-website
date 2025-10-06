@@ -1,0 +1,17 @@
+{
+  "name": "demo-website",
+  "version": "1.0.0",
+  "description": "Medical visualization hub with TypeScript",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "serve": "npx http-server . -p 8080"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}

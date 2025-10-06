@@ -1,0 +1,20 @@
+{
+  "title": "Left Ventricular Ejection Fraction (LVEF)",
+  "loading": "Loading LVEF visualization...",
+  "subtitle": "LVEF Calculator & Visualization",
+  "description": "Left Ventricular Ejection Fraction (LVEF) is a measurement of the percentage of blood leaving your heart each time it contracts.",
+  "form": {
+    "heading": "Calculate LVEF",
+    "edvLabel": "End-Diastolic Volume (mL):",
+    "edvPlaceholder": "Enter EDV",
+    "esvLabel": "End-Systolic Volume (mL):",
+    "esvPlaceholder": "Enter ESV",
+    "calculateButton": "Calculate LVEF"
+  },
+  "ranges": {
+    "heading": "LVEF Ranges",
+    "normal": "Normal: 50-70%",
+    "borderline": "Borderline: 40-49%",
+    "reduced": "Reduced: <40%"
+  }
+}
