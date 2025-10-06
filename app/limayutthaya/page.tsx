@@ -33,7 +33,7 @@ export default function LimAyutthayaPage() {
         <div className="page-wrapper">
           <div className="logo-container">
             <Image
-              src={getAssetPath("/assets/images/LimAyutthaya_logo.jpg")}
+              src={getAssetPath("/public/assets/images/LimAyutthaya_logo.jpg")}
               alt="Lim Ayutthaya"
               width={400}
               height={400}
