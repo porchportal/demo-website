@@ -87,7 +87,7 @@ h1 {
 /* Top buttons with text */
 .lvef-button {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    background-image: url('../public/public/assets/image_medical/lvef_3d_.png');
+    background-image: url('../public/assets/image_medical/lvef_3d_.png');
     background-size: cover;
     background-position: center;
     position: relative;
@@ -115,7 +115,7 @@ h1 {
 
 .attention-button {
     background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-    background-image: url('../public/public/assets/image_eye/EyeTracking_preview.png');
+    background-image: url('../public/assets/image_eye/EyeTracking_preview.png');
     background-size: cover;
     background-position: center;
     position: relative;
