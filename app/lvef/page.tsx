@@ -10,6 +10,7 @@ import HeartTransition from '../../components/HeartTransition'
 
 interface LVEFLabels {
   title: string
+  titleMobile?: string
   subtitle: string
   description: string
   form: {
@@ -22,28 +23,86 @@ interface LVEFLabels {
   }
   ranges: {
     heading: string
-    normal: string
-    borderline: string
-    reduced: string
+    description: string
+    categories: Array<{
+      label: string
+      value: string
+      description: string
+      color: string
+    }>
   }
   images: {
     heartModel: string
     coReEcho: string
     gradCam: string
     tableExperimental: string
+    formula: string
+    dataDemoImage: string
+    dataDemo1Gif: string
+    dataDemo2Gif: string
   }
   sections: {
-    overview: {
+    objective: {
       title: string
       content: string
     }
-    visualization: {
+    dataset: {
       title: string
-      description: string
+      intro: string
+      figureDescription: string
+      panels: string[]
+      overlay: string
+      waveform: string
+      providesTitle: string
+      provides: string[]
+      conclusion: string
+    }
+    overview: {
+      title: string
+      subtitle: string
+      stage1: {
+        title: string
+        points: string[]
+      }
+      stage2: {
+        title: string
+        points: string[]
+      }
+      benefit: string
+    }
+    gradcam: {
+      title: string
+      intro: string
+      points: string[]
+      outcome: string
     }
     results: {
       title: string
-      description: string
+      content: string
+    }
+    impact: {
+      title: string
+      points: string[]
+    }
+    references: {
+      title: string
+      mainMethods: {
+        title: string
+        items: Array<{
+          name: string
+          description: string
+          paper?: string
+          github?: string
+        }>
+      }
+      additional: {
+        title: string
+        items: Array<{
+          description: string
+          link?: string
+          source?: string
+        }>
+      }
     }
   }
 }
@@ -55,7 +114,8 @@ export default function LVEFPage() {
   const [esv, setEsv] = useState('')
   const [result, setResult] = useState<{ lvef: number; category: string; color: string } | null>(null)
   const [error, setError] = useState('')
-  const [activeSection, setActiveSection] = useState('overview')
+  const [activeSection, setActiveSection] = useState('objective')
+  const [showToc, setShowToc] = useState(false)
 
   const calculateLVEF = () => {
     setError('')
@@ -75,18 +135,41 @@ export default function LVEFPage() {
     }
 
     const lvef = ((edvNum - esvNum) / edvNum) * 100
-    const category = lvef >= 50 ? 'Normal' : lvef >= 40 ? 'Borderline' : 'Reduced'
-    const color = category === 'Normal' ? '#22c55e' : category === 'Borderline' ? '#f59e0b' : '#ef4444'
+
+    let category = ''
+    let color = ''
+
+    if (lvef > 70) {
+      category = 'Hyperdynamic'
+      color = '#10b981'
+    } else if (lvef >= 50) {
+      category = 'Normal'
+      color = '#22c55e'
+    } else if (lvef >= 40) {
+      category = 'Mild Dysfunction'
+      color = '#f59e0b'
+    } else if (lvef >= 30) {
+      category = 'Moderate Dysfunction'
+      color = '#f97316'
+    } else {
+      category = 'Severe Dysfunction'
+      color = '#ef4444'
+    }
 
     setResult({ lvef, category, color })
   }
 
   const scrollToSection = (sectionId: string) => {
     setActiveSection(sectionId)
+    setShowToc(false) // Close TOC on mobile when clicking a link
     const element = document.getElementById(sectionId)
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
+  }
+
+  const toggleToc = () => {
+    setShowToc(!showToc)
   }
 
   return (
@@ -95,55 +178,22 @@ export default function LVEFPage() {
 
       <Link href="/" className="back-button-paper">{mainLabels.navigation.backButton}</Link>
 
-      <div className="paper-container">
-        {/* Sidebar */}
-        <aside className="paper-sidebar">
-          <h3>Table of Contents</h3>
-          <nav>
-            <a
-              href="#overview"
-              className={activeSection === 'overview' ? 'active' : ''}
-              onClick={(e) => { e.preventDefault(); scrollToSection('overview'); }}
-            >
-              {lvefLabels.sections.overview.title}
-            </a>
-            <a
-              href="#calculator"
-              className={activeSection === 'calculator' ? 'active' : ''}
-              onClick={(e) => { e.preventDefault(); scrollToSection('calculator'); }}
-            >
-              Calculator
-            </a>
-            <a
-              href="#ranges"
-              className={activeSection === 'ranges' ? 'active' : ''}
-              onClick={(e) => { e.preventDefault(); scrollToSection('ranges'); }}
-            >
-              {lvefLabels.ranges.heading}
-            </a>
-            <a
-              href="#visualization"
-              className={activeSection === 'visualization' ? 'active' : ''}
-              onClick={(e) => { e.preventDefault(); scrollToSection('visualization'); }}
-            >
-              {lvefLabels.sections.visualization.title}
-            </a>
-            <a
-              href="#results"
-              className={activeSection === 'results' ? 'active' : ''}
-              onClick={(e) => { e.preventDefault(); scrollToSection('results'); }}
-            >
-              {lvefLabels.sections.results.title}
-            </a>
-          </nav>
-        </aside>
+      {/* Mobile TOC Toggle Button */}
+      <button className="toc-toggle" onClick={toggleToc} aria-label="Toggle Table of Contents">
+        {showToc ? '✕' : '☰'}
+      </button>
 
+      {/* Overlay for mobile */}
+      <div className={`toc-overlay ${showToc ? 'show' : ''}`} onClick={() => setShowToc(false)}></div>
+
+      <div className="paper-container">
         {/* Main Content */}
         <main className="paper-content">
           <header className="paper-header">
             <div className="header-content">
               <div className="header-text">
-                <h1>{lvefLabels.title}</h1>
+                <h1 className="title-desktop">{lvefLabels.title}</h1>
+                <h1 className="title-mobile">{lvefLabels.titleMobile || lvefLabels.title}</h1>
                 <p className="paper-subtitle">{lvefLabels.subtitle}</p>
               </div>
               <div className="header-image-container" id="heart-image-target">
@@ -156,75 +206,100 @@ export default function LVEFPage() {
             </div>
           </header>
 
-          <section id="overview" className="paper-section">
-            <h2>{lvefLabels.sections.overview.title}</h2>
-            <p>{lvefLabels.sections.overview.content}</p>
+          <section id="objective" className="paper-section">
+            <h2>{lvefLabels.sections.objective.title}</h2>
+            <p>{lvefLabels.sections.objective.content}</p>
           </section>
 
-          <section id="calculator" className="paper-section">
-            <h2>{lvefLabels.form.heading}</h2>
-            <div className="calculator-form">
-              <div className="form-group">
-                <label>{lvefLabels.form.edvLabel}</label>
-                <input
-                  type="number"
-                  value={edv}
-                  onChange={(e) => setEdv(e.target.value)}
-                  placeholder={lvefLabels.form.edvPlaceholder}
-                  className="form-input"
-                />
-              </div>
-              <div className="form-group">
-                <label>{lvefLabels.form.esvLabel}</label>
-                <input
-                  type="number"
-                  value={esv}
-                  onChange={(e) => setEsv(e.target.value)}
-                  placeholder={lvefLabels.form.esvPlaceholder}
-                  className="form-input"
-                />
-              </div>
-              <button onClick={calculateLVEF} className="calculate-btn">
-                {lvefLabels.form.calculateButton}
-              </button>
+          <section id="dataset" className="paper-section">
+            <h2>{lvefLabels.sections.dataset.title}</h2>
 
-              {error && (
-                <div className="error-message">{error}</div>
-              )}
-
-              {result && (
-                <div className="result-box" style={{ borderLeftColor: result.color }}>
-                  <div className="result-title">Result</div>
-                  <div className="result-value" style={{ color: result.color }}>
-                    LVEF: {result.lvef.toFixed(1)}%
-                  </div>
-                  <div className="result-category">{result.category}</div>
+            <div className="medical-image-container">
+              <div style={{ display: 'flex', gap: '15px', flexWrap: 'wrap', justifyContent: 'center' }}>
+                <div style={{ flex: '1 1 200px', maxWidth: '280px' }}>
+                  <img
+                    src={getAssetPath(lvefLabels.images.dataDemoImage)}
+                    alt="Dataset Demo Image"
+                    className="medical-image"
+                    style={{ width: '100%', height: 'auto' }}
+                  />
+                  <p className="image-caption">Figure 3: Dataset Example - Echocardiographic Frame</p>
                 </div>
-              )}
+                <div style={{ flex: '1 1 200px', maxWidth: '280px' }}>
+                  <img
+                    src={getAssetPath(lvefLabels.images.dataDemo1Gif)}
+                    alt="Dataset Demo Animation 1"
+                    className="medical-image"
+                    style={{ width: '100%', height: 'auto' }}
+                  />
+                  <p className="image-caption">Figure 4: Cardiac Cycle Animation - Example 1</p>
+                </div>
+                <div style={{ flex: '1 1 200px', maxWidth: '280px' }}>
+                  <img
+                    src={getAssetPath(lvefLabels.images.dataDemo2Gif)}
+                    alt="Dataset Demo Animation 2"
+                    className="medical-image"
+                    style={{ width: '100%', height: 'auto' }}
+                  />
+                  <p className="image-caption">Figure 5: Cardiac Cycle Animation - Example 2</p>
+                </div>
+              </div>
             </div>
+
+            <p>{lvefLabels.sections.dataset.intro}</p>
+
+            <div className="medical-image-container">
+              <img
+                src={getAssetPath(lvefLabels.images.formula)}
+                alt="LVEF Formula"
+                className="medical-image"
+                style={{ maxWidth: '400px', width: '100%' }}
+              />
+            </div>
+
+            <p>{lvefLabels.sections.dataset.figureDescription}</p>
+            <ul>
+              {lvefLabels.sections.dataset.panels.map((panel, index) => (
+                <li key={index}>{panel}</li>
+              ))}
+            </ul>
+            <p>{lvefLabels.sections.dataset.overlay}</p>
+
+            <p>{lvefLabels.sections.dataset.waveform}</p>
+
+            <p><strong>{lvefLabels.sections.dataset.providesTitle}</strong></p>
+            <ul>
+              {lvefLabels.sections.dataset.provides.map((item, index) => (
+                <li key={index}>{item}</li>
+              ))}
+            </ul>
+
+            <p>{lvefLabels.sections.dataset.conclusion}</p>
           </section>
 
           <section id="ranges" className="paper-section">
             <h2>{lvefLabels.ranges.heading}</h2>
+            <p className="ranges-description">{lvefLabels.ranges.description}</p>
             <div className="ranges-grid">
-              <div className="range-card range-normal">
-                <div className="range-label">Normal</div>
-                <div className="range-value">50-70%</div>
-              </div>
-              <div className="range-card range-borderline">
-                <div className="range-label">Borderline</div>
-                <div className="range-value">40-49%</div>
-              </div>
-              <div className="range-card range-reduced">
-                <div className="range-label">Reduced</div>
-                <div className="range-value">&lt;40%</div>
-              </div>
+              {lvefLabels.ranges.categories.map((category, index) => (
+                <div
+                  key={index}
+                  className="range-card"
+                  style={{ borderColor: category.color }}
+                >
+                  <div className="range-label">{category.label}</div>
+                  <div className="range-value" style={{ color: category.color }}>
+                    {category.value}
+                  </div>
+                  <div className="range-description-text">{category.description}</div>
+                </div>
+              ))}
             </div>
           </section>
 
-          <section id="visualization" className="paper-section">
-            <h2>{lvefLabels.sections.visualization.title}</h2>
-            <p>{lvefLabels.sections.visualization.description}</p>
+          <section id="overview" className="paper-section">
+            <h2>{lvefLabels.sections.overview.title}</h2>
+            <p className="section-subtitle">{lvefLabels.sections.overview.subtitle}</p>
 
             <div className="medical-image-container">
               <img
@@ -235,7 +310,38 @@ export default function LVEFPage() {
               <p className="image-caption">Figure 1: CoReEcho - Echocardiographic Analysis</p>
             </div>
 
-            <div className="medical-image-container">
+            <div className="framework-stage">
+              <h3>{lvefLabels.sections.overview.stage1.title}</h3>
+              <ul>
+                {lvefLabels.sections.overview.stage1.points.map((point, index) => (
+                  <li key={index}>{point}</li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="framework-stage">
+              <h3>{lvefLabels.sections.overview.stage2.title}</h3>
+              <ul>
+                {lvefLabels.sections.overview.stage2.points.map((point, index) => (
+                  <li key={index}>{point}</li>
+                ))}
+              </ul>
+            </div>
+
+            <p className="key-benefit"><strong>Key Benefit:</strong> {lvefLabels.sections.overview.benefit}</p>
+          </section>
+
+          <section id="gradcam" className="paper-section">
+            <h2>{lvefLabels.sections.gradcam.title}</h2>
+            <p>{lvefLabels.sections.gradcam.intro}</p>
+            <ul>
+              {lvefLabels.sections.gradcam.points.map((point, index) => (
+                <li key={index}>{point}</li>
+              ))}
+            </ul>
+            <p className="outcome-highlight"><strong>🧠 Outcome:</strong> {lvefLabels.sections.gradcam.outcome}</p>
+
+            <div className="medical-image-container compact">
               <img
                 src={getAssetPath(lvefLabels.images.gradCam)}
                 alt="Grad-CAM Visualization"
@@ -247,7 +353,6 @@ export default function LVEFPage() {
 
           <section id="results" className="paper-section">
             <h2>{lvefLabels.sections.results.title}</h2>
-            <p>{lvefLabels.sections.results.description}</p>
 
             <div className="medical-image-container">
               <img
@@ -257,8 +362,126 @@ export default function LVEFPage() {
               />
               <p className="image-caption">Table 1: Comparative Experimental Results</p>
             </div>
+
+            {lvefLabels.sections.results.content.split('\n\n').map((paragraph, index) => (
+              <p key={index}>{paragraph}</p>
+            ))}
+          </section>
+
+          <section id="impact" className="paper-section">
+            <h2>{lvefLabels.sections.impact.title}</h2>
+            <ul>
+              {lvefLabels.sections.impact.points.map((point, index) => (
+                <li key={index}>{point}</li>
+              ))}
+            </ul>
+          </section>
+
+          <section id="references" className="paper-section">
+            <h2>{lvefLabels.sections.references.title}</h2>
+
+            <div className="references-subsection">
+              <h3>{lvefLabels.sections.references.mainMethods.title}</h3>
+              {lvefLabels.sections.references.mainMethods.items.map((item, index) => (
+                <div key={index} className="reference-item">
+                  <div className="reference-name">{item.name}</div>
+                  <div className="reference-description">{item.description}</div>
+                  <div className="reference-links">
+                    {item.paper && (
+                      <a href={item.paper} target="_blank" rel="noopener noreferrer" className="reference-link">
+                        📄 Paper arXiv
+                      </a>
+                    )}
+                    {item.github && (
+                      <a href={item.github} target="_blank" rel="noopener noreferrer" className="reference-link">
+                        💻 Github
+                      </a>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="references-subsection">
+              <h3>{lvefLabels.sections.references.additional.title}</h3>
+              {lvefLabels.sections.references.additional.items.map((item, index) => (
+                <div key={index} className="reference-item">
+                  <div className="reference-description">{item.description}</div>
+                  {item.link && item.source && (
+                    <div className="reference-links">
+                      <a href={item.link} target="_blank" rel="noopener noreferrer" className="reference-link">
+                        🔗 {item.source}
+                      </a>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
           </section>
         </main>
+
+        {/* Sidebar */}
+        <aside className={`paper-sidebar ${showToc ? 'show' : ''}`}>
+          <h3>Table of Contents</h3>
+          <nav>
+            <a
+              href="#objective"
+              className={activeSection === 'objective' ? 'active' : ''}
+              onClick={(e) => { e.preventDefault(); scrollToSection('objective'); }}
+            >
+              {lvefLabels.sections.objective.title}
+            </a>
+            <a
+              href="#dataset"
+              className={activeSection === 'dataset' ? 'active' : ''}
+              onClick={(e) => { e.preventDefault(); scrollToSection('dataset'); }}
+            >
+              {lvefLabels.sections.dataset.title}
+            </a>
+            <a
+              href="#ranges"
+              className={activeSection === 'ranges' ? 'active' : ''}
+              onClick={(e) => { e.preventDefault(); scrollToSection('ranges'); }}
+            >
+              {lvefLabels.ranges.heading}
+            </a>
+            <a
+              href="#overview"
+              className={activeSection === 'overview' ? 'active' : ''}
+              onClick={(e) => { e.preventDefault(); scrollToSection('overview'); }}
+            >
+              {lvefLabels.sections.overview.title}
+            </a>
+            <a
+              href="#gradcam"
+              className={activeSection === 'gradcam' ? 'active' : ''}
+              onClick={(e) => { e.preventDefault(); scrollToSection('gradcam'); }}
+            >
+              {lvefLabels.sections.gradcam.title}
+            </a>
+            <a
+              href="#results"
+              className={activeSection === 'results' ? 'active' : ''}
+              onClick={(e) => { e.preventDefault(); scrollToSection('results'); }}
+            >
+              {lvefLabels.sections.results.title}
+            </a>
+            <a
+              href="#impact"
+              className={activeSection === 'impact' ? 'active' : ''}
+              onClick={(e) => { e.preventDefault(); scrollToSection('impact'); }}
+            >
+              {lvefLabels.sections.impact.title}
+            </a>
+            <a
+              href="#references"
+              className={activeSection === 'references' ? 'active' : ''}
+              onClick={(e) => { e.preventDefault(); scrollToSection('references'); }}
+            >
+              {lvefLabels.sections.references.title}
+            </a>
+          </nav>
+        </aside>
       </div>
     </div>
   )

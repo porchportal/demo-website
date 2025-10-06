@@ -1,7 +1,8 @@
 {
   "title": "Left Ventricular Ejection Fraction (LVEF)",
+  "titleMobile": "LVEF Calculator",
   "loading": "Loading LVEF visualization...",
-  "subtitle": "LVEF Calculator & Visualization",
+  "subtitle": "Ultrasound-Based Echocardiographic Analysis using CoReEcho with Grad-CAM–Guided Optimization",
   "description": "Left Ventricular Ejection Fraction (LVEF) is a measurement of the percentage of blood leaving your heart each time it contracts.",
   "form": {
     "heading": "Calculate LVEF",
@@ -13,28 +14,155 @@
   },
   "ranges": {
     "heading": "LVEF Ranges",
-    "normal": "Normal: 50-70%",
-    "borderline": "Borderline: 40-49%",
-    "reduced": "Reduced: <40%"
+    "description": "The American College of Cardiology classifies LVEF into the following categories (Kosaraju et al., 2023):",
+    "categories": [
+      {
+        "label": "Hyperdynamic",
+        "value": ">70%",
+        "description": "LVEF greater than 70%",
+        "color": "#10b981"
+      },
+      {
+        "label": "Normal",
+        "value": "50-70%",
+        "description": "LVEF 50% to 70%",
+        "color": "#22c55e"
+      },
+      {
+        "label": "Mild Dysfunction",
+        "value": "40-49%",
+        "description": "LVEF 40% to 49%",
+        "color": "#f59e0b"
+      },
+      {
+        "label": "Moderate Dysfunction",
+        "value": "30-39%",
+        "description": "LVEF 30% to 39%",
+        "color": "#f97316"
+      },
+      {
+        "label": "Severe Dysfunction",
+        "value": "<30%",
+        "description": "LVEF less than 30%",
+        "color": "#ef4444"
+      }
+    ]
   },
   "images": {
     "heartModel": "/assets/image_medical/lvef_3d_.png",
     "coReEcho": "/assets/image_medical/CoReEcho.png",
     "gradCam": "/assets/image_medical/GradCam.png",
-    "tableExperimental": "/assets/image_medical/table_experimental.png"
+    "tableExperimental": "/assets/image_medical/table_experimental.png",
+    "formula": "/assets/image_medical/formular.png",
+    "dataDemoImage": "/assets/image_medical/data_demo_image.png",
+    "dataDemo1Gif": "/assets/image_medical/data_demo_1.gif",
+    "dataDemo2Gif": "/assets/image_medical/data_demo_2.gif"
   },
   "sections": {
-    "overview": {
-      "title": "Overview",
-      "content": "Left Ventricular Ejection Fraction (LVEF) is a measurement of the percentage of blood leaving your heart each time it contracts."
+    "objective": {
+      "title": "Objective",
+      "content": "To develop a deep learning framework capable of estimating Left Ventricular Ejection Fraction (LVEF) from echocardiography, while utilizing Grad-CAM visualization not only for interpretability but also to optimize model attention—guiding the AI toward clinically relevant ventricular regions for more reliable and explainable cardiac assessment."
     },
-    "visualization": {
-      "title": "Visual Analysis",
-      "description": "Advanced visualization techniques for cardiac assessment using echocardiography and gradient-weighted class activation mapping (Grad-CAM)."
+    "dataset": {
+      "title": "Dataset Overview",
+      "intro": "The dataset used in this study comprises echocardiographic video sequences of the heart in the apical four-chamber (A4C) view, covering complete cardiac cycles from end-diastolic (EDV) to end-systolic (ESV) phases. Each video was manually annotated by experts to identify the ventricular boundaries at both phases, enabling the calculation of Left Ventricular Ejection Fraction (LVEF) as:",
+      "figureDescription": "Figure 2 illustrates a representative example from the dataset.",
+      "panels": [
+        "The left panel shows the end-diastolic frame (EDV) — the point of maximal ventricular filling before contraction.",
+        "The right panel shows the end-systolic frame (ESV) — the moment of maximal contraction when the ventricle is smallest."
+      ],
+      "overlay": "The red overlay highlights the segmented left ventricular cavity, which is used to calculate ventricular volume and determine the LVEF.",
+      "waveform": "The graph below the ultrasound frames corresponds to the cardiac cycle waveform, where the EDV and ESV points are marked to indicate how volume changes dynamically throughout the heartbeat.",
+      "providesTitle": "This dataset provides:",
+      "provides": [
+        "Frame-level temporal information (capturing heart motion over time),",
+        "Quantitative volume annotations (EDV, ESV, LVEF) for supervised regression, and",
+        "Visual interpretability through segmentation masks and waveform alignment."
+      ],
+      "conclusion": "Together, these elements support both quantitative evaluation of cardiac function and qualitative analysis of model attention when using Grad-CAM visualization."
+    },
+    "overview": {
+      "title": "CoReEcho Framework Overview",
+      "subtitle": "CoReEcho (Context-Relation Echocardiography Network) is a two-stage learning framework designed for robust and generalizable cardiac function estimation.",
+      "stage1": {
+        "title": "Stage 1 — Representation Learning",
+        "points": [
+          "Echocardiogram clips are augmented and sampled with different frame counts (FC) and temporal strides (T).",
+          "The Feature Extractor (Fₑ) encodes spatiotemporal features.",
+          "A Shallow MLP regressor (Fᵣ) predicts LVEF under a combined relational consistency loss (Lₙᶜ) and regression loss (L₁)."
+        ]
+      },
+      "stage2": {
+        "title": "Stage 2 — Fine-tuning with Weight Transfer",
+        "points": [
+          "The pretrained Fₑ is frozen and reused.",
+          "The Fᵣ regressor is fine-tuned for improved performance.",
+          "Evaluation conducted on various FC–T configurations."
+        ]
+      },
+      "benefit": "This two-step process enhances feature robustness while reducing overfitting on limited cardiac datasets."
+    },
+    "gradcam": {
+      "title": "Grad-CAM–Guided Optimization",
+      "intro": "Grad-CAM (Gradient-weighted Class Activation Mapping) was integrated as both an interpretability tool and a feedback optimization mechanism:",
+      "points": [
+        "Interpretability: Visual heatmaps highlight cardiac areas influencing the AI's LVEF estimation (typically the left ventricle and myocardial walls).",
+        "Optimization: Grad-CAM outputs were analyzed to identify non-relevant attention zones (e.g., noise, probe artifacts). This feedback was used to adjust sampling strategy and feature learning, ensuring the AI consistently focuses on physiologically meaningful regions."
+      ],
+      "outcome": "The Grad-CAM–guided model achieved more stable attention and improved correlation with cardiologist assessments."
     },
     "results": {
       "title": "Experimental Results",
-      "description": "Comparative analysis of LVEF assessment methods and their clinical applications."
+      "content": "The experimental evaluation compared multiple model configurations to assess the impact of Grad-CAM–based optimization on AI-assisted echocardiography. The blue-highlighted configuration in the results table represents the baseline setup, corresponding to the original model design described in the paper. This configuration serves as a reference point for subsequent improvements.\n\nAcross all tested configurations, models optimized with Grad-CAM visualization feedback consistently demonstrated superior interpretability and quantitative performance. By integrating Grad-CAM during training, the system gained spatial awareness of diagnostically relevant cardiac regions, allowing more precise feature extraction from the left ventricular area.\n\nAs shown in the green-highlighted row, this optimized configuration achieved the highest performance among all tested setups. It demonstrated improved Left Ventricular Ejection Fraction (LVEF) estimation accuracy, enhanced localization of myocardial motion, and reduced prediction variance compared to the baseline.\n\nQualitatively, Grad-CAM heatmaps confirmed that the optimized model focused on clinically meaningful structures—particularly the endocardial border and interventricular septum—during both systolic and diastolic phases. Supporting evidence is provided through Grad-CAM video visualizations (GIF format), which clearly illustrate attention progression over cardiac cycles. These visual results show that the optimized model dynamically tracks key heart motion patterns more effectively than the baseline.\n\nIn summary, the integration of Grad-CAM not only enhances model interpretability but also yields measurable gains in predictive accuracy. The visualization-guided optimization thus represents a promising pathway for trustworthy and clinically aligned AI-assisted ultrasound analysis."
+    },
+    "impact": {
+      "title": "Clinical & Research Impact",
+      "points": [
+        "🩺 Clinical Insight: AI visualizations improve physician trust and help validate model reasoning.",
+        "⚙️ Technical Innovation: Grad-CAM integration transforms explainability into an optimization feedback loop.",
+        "🌍 Scalability: Suitable for real-time ultrasound analysis and deployment in hospitals or telehealth systems."
+      ]
+    },
+    "references": {
+      "title": "References",
+      "mainMethods": {
+        "title": "Main Methods",
+        "items": [
+          {
+            "name": "CoReEcho (16 Sep 2024)",
+            "description": "Continuous Representation Learning for 2D+time Echocardiography Analysis",
+            "paper": "https://arxiv.org/abs/2403.10164",
+            "github": "https://github.com/BioMedIA-MBZUAI/CoReEcho"
+          },
+          {
+            "name": "UniFormer (8 Feb 2022)",
+            "description": "UNIFIED TRANSFORMER FOR EFFICIENT SPATIOTEMPORAL REPRESENTATION LEARNING",
+            "paper": "https://arxiv.org/pdf/2201.04676",
+            "github": "https://github.com/Sense-X/UniFormer"
+          },
+          {
+            "name": "Grad-CAM (3 Dec 2019)",
+            "description": "Visual Explanations from Deep Networks via Gradient-based Localization",
+            "paper": "https://arxiv.org/pdf/1610.02391",
+            "github": "https://github.com/ramprs/grad-cam/"
+          },
+          {
+            "name": "Additional GradCAM model",
+            "description": "Advanced Explainable AI for computer vision",
+            "github": "https://github.com/jacobgil/pytorch-grad-cam?tab=readme-ov-file"
+          }
+        ]
+      },
+      "additional": {
+        "title": "Additional",
+        "items": [
+          {
+            "description": "The American College of Cardiology classifies LVEF into the following categories (Kosaraju et al., 2023)",
+            "link": "https://www.nursingcenter.com/blogs-plus/blogs/blogs-post?identifier=How-to-Calculate-Ejection-Fraction#/post/How-to-Calculate-Ejection-Fraction",
+            "source": "NursingCenter"
+          }
+        ]
+      }
     }
   }
 }
