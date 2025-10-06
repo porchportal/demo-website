@@ -1,8 +1,9 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import labelsData from '../public/assets/context/main_page.json'
+import { getAssetPath } from '../lib/utils'
 
 interface Labels {
   siteName: string
@@ -16,16 +17,7 @@ interface Labels {
 }
 
 export default function Home() {
-  const [labels, setLabels] = useState<Labels | null>(null)
-
-  useEffect(() => {
-    fetch('/assets/context/main_page.json')
-      .then(res => res.json())
-      .then(data => setLabels(data))
-      .catch(err => console.error('Error loading labels:', err))
-  }, [])
-
-  if (!labels) return <div>Loading...</div>
+  const labels = labelsData as Labels
 
   return (
     <div className="page-content active">
@@ -40,7 +32,7 @@ export default function Home() {
           </Link>
           <Link href="/openmirai" className="nav-button image-button">
             <Image
-              src="/assets/images/OpenMirai_logo.png"
+              src={getAssetPath("/assets/images/OpenMirai_logo.png")}
               alt="OpenMirai"
               width={200}
               height={200}
@@ -48,7 +40,7 @@ export default function Home() {
           </Link>
           <Link href="/limayutthaya" className="nav-button image-button">
             <Image
-              src="/assets/images/LimAyutthaya_logo.jpg"
+              src={getAssetPath("/assets/images/LimAyutthaya_logo.jpg")}
               alt="Lim Ayutthaya"
               width={200}
               height={200}

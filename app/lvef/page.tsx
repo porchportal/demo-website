@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import './lvef.css'
+import { getAssetPath } from '../../lib/utils'
 
 interface LVEFLabels {
   title: string
@@ -53,7 +54,7 @@ export default function LVEFPage() {
   const [activeSection, setActiveSection] = useState('overview')
 
   useEffect(() => {
-    fetch('/assets/context/main_page.json')
+    fetch(getAssetPath('/assets/context/main_page.json'))
       .then(res => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`)
         return res.json()
@@ -61,7 +62,7 @@ export default function LVEFPage() {
       .then(data => setMainLabels(data))
       .catch(err => console.error('Error loading main_page.json:', err))
 
-    fetch('/assets/context/lvef.json')
+    fetch(getAssetPath('/assets/context/lvef.json'))
       .then(res => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`)
         return res.json()
@@ -230,7 +231,7 @@ export default function LVEFPage() {
 
             <div className="medical-image-container">
               <img
-                src={lvefLabels.images.coReEcho}
+                src={getAssetPath(lvefLabels.images.coReEcho)}
                 alt="CoReEcho Visualization"
                 className="medical-image"
               />
@@ -239,7 +240,7 @@ export default function LVEFPage() {
 
             <div className="medical-image-container">
               <img
-                src={lvefLabels.images.gradCam}
+                src={getAssetPath(lvefLabels.images.gradCam)}
                 alt="Grad-CAM Visualization"
                 className="medical-image"
               />
@@ -253,7 +254,7 @@ export default function LVEFPage() {
 
             <div className="medical-image-container">
               <img
-                src={lvefLabels.images.tableExperimental}
+                src={getAssetPath(lvefLabels.images.tableExperimental)}
                 alt="Experimental Results"
                 className="medical-image"
               />

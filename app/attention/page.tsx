@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { getAssetPath } from '../../lib/utils'
 
 interface AttentionLabels {
   subtitle: string
@@ -41,12 +42,12 @@ export default function AttentionPage() {
   const [canvasRef, setCanvasRef] = useState<HTMLCanvasElement | null>(null)
 
   useEffect(() => {
-    fetch('/assets/context/main_page.json')
+    fetch(getAssetPath('/assets/context/main_page.json'))
       .then(res => res.json())
       .then(data => setLabels(data))
       .catch(err => console.error('Error loading labels:', err))
 
-    fetch('/assets/context/attention.json')
+    fetch(getAssetPath('/assets/context/attention.json'))
       .then(res => res.json())
       .then(data => setAttentionLabels(data))
       .catch(err => console.error('Error loading attention labels:', err))

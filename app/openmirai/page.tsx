@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { getAssetPath } from '../../lib/utils'
 
 interface OpenMiraiLabels {
   title: string
@@ -24,12 +25,12 @@ export default function OpenMiraiPage() {
   const [pageLabels, setPageLabels] = useState<OpenMiraiLabels | null>(null)
 
   useEffect(() => {
-    fetch('/assets/context/main_page.json')
+    fetch(getAssetPath('/assets/context/main_page.json'))
       .then(res => res.json())
       .then(data => setLabels(data))
       .catch(err => console.error('Error loading labels:', err))
 
-    fetch('/assets/context/openmirai.json')
+    fetch(getAssetPath('/assets/context/openmirai.json'))
       .then(res => res.json())
       .then(data => setPageLabels(data))
       .catch(err => console.error('Error loading page labels:', err))
@@ -45,7 +46,7 @@ export default function OpenMiraiPage() {
 
         <div style={{ padding: '20px', textAlign: 'center' }}>
           <Image
-            src="/assets/images/OpenMirai_logo.png"
+            src={getAssetPath("/assets/images/OpenMirai_logo.png")}
             alt="OpenMirai"
             width={400}
             height={400}

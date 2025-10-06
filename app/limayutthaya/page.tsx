@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { getAssetPath } from '../../lib/utils'
 
 interface LimAyutthayaLabels {
   title: string
@@ -22,12 +23,12 @@ export default function LimAyutthayaPage() {
   const [pageLabels, setPageLabels] = useState<LimAyutthayaLabels | null>(null)
 
   useEffect(() => {
-    fetch('/assets/context/main_page.json')
+    fetch(getAssetPath('/assets/context/main_page.json'))
       .then(res => res.json())
       .then(data => setLabels(data))
       .catch(err => console.error('Error loading labels:', err))
 
-    fetch('/assets/context/limayutthaya.json')
+    fetch(getAssetPath('/assets/context/limayutthaya.json'))
       .then(res => res.json())
       .then(data => setPageLabels(data))
       .catch(err => console.error('Error loading page labels:', err))
@@ -43,7 +44,7 @@ export default function LimAyutthayaPage() {
 
         <div style={{ padding: '20px', textAlign: 'center' }}>
           <Image
-            src="/assets/images/LimAyutthaya_logo.jpg"
+            src={getAssetPath("/assets/images/LimAyutthaya_logo.jpg")}
             alt="Lim Ayutthaya"
             width={400}
             height={400}
