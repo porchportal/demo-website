@@ -1,0 +1,39 @@
+{
+  "title": "Left Ventricular Ejection Fraction (LVEF)",
+  "loading": "Loading LVEF visualization...",
+  "subtitle": "LVEF Calculator & Visualization",
+  "description": "Left Ventricular Ejection Fraction (LVEF) is a measurement of the percentage of blood leaving your heart each time it contracts.",
+  "form": {
+    "heading": "Calculate LVEF",
+    "edvLabel": "End-Diastolic Volume (mL):",
+    "edvPlaceholder": "Enter EDV",
+    "esvLabel": "End-Systolic Volume (mL):",
+    "esvPlaceholder": "Enter ESV",
+    "calculateButton": "Calculate LVEF"
+  },
+  "ranges": {
+    "heading": "LVEF Ranges",
+    "normal": "Normal: 50-70%",
+    "borderline": "Borderline: 40-49%",
+    "reduced": "Reduced: <40%"
+  },
+  "images": {
+    "coReEcho": "/assets/image_medical/CoReEcho.png",
+    "gradCam": "/assets/image_medical/GradCam.png",
+    "tableExperimental": "/assets/image_medical/table_experimental.png"
+  },
+  "sections": {
+    "overview": {
+      "title": "Overview",
+      "content": "Left Ventricular Ejection Fraction (LVEF) is a measurement of the percentage of blood leaving your heart each time it contracts."
+    },
+    "visualization": {
+      "title": "Visual Analysis",
+      "description": "Advanced visualization techniques for cardiac assessment using echocardiography and gradient-weighted class activation mapping (Grad-CAM)."
+    },
+    "results": {
+      "title": "Experimental Results",
+      "description": "Comparative analysis of LVEF assessment methods and their clinical applications."
+    }
+  }
+}

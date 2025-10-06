@@ -1,0 +1,62 @@
+{
+  "siteName": "Medical Visualization Hub",
+  "navigation": {
+    "backButton": "← Back to Menu"
+  },
+  "mainMenu": {
+    "title": "Medical Visualization Hub",
+    "buttons": {
+      "lvef": "Left Ventricular Ejection Fraction (LVEF)",
+      "attention": "Attention Dot Visualization in Eye-Tracking",
+      "image1": "Image 1",
+      "image2": "Image 2"
+    }
+  },
+  "lvefPage": {
+    "title": "Left Ventricular Ejection Fraction (LVEF)",
+    "loading": "Loading LVEF visualization...",
+    "subtitle": "LVEF Calculator & Visualization",
+    "description": "Left Ventricular Ejection Fraction (LVEF) is a measurement of the percentage of blood leaving your heart each time it contracts.",
+    "form": {
+      "heading": "Calculate LVEF",
+      "edvLabel": "End-Diastolic Volume (mL):",
+      "edvPlaceholder": "Enter EDV",
+      "esvLabel": "End-Systolic Volume (mL):",
+      "esvPlaceholder": "Enter ESV",
+      "calculateButton": "Calculate LVEF"
+    },
+    "ranges": {
+      "heading": "LVEF Ranges",
+      "normal": "Normal: 50-70%",
+      "borderline": "Borderline: 40-49%",
+      "reduced": "Reduced: <40%"
+    }
+  },
+  "attentionPage": {
+    "title": "Attention Dot Visualization",
+    "loading": "Loading attention dot visualization...",
+    "subtitle": "Eye-Tracking Attention Visualization",
+    "description": "This visualization demonstrates how attention dots work in eye-tracking technology. Click anywhere on the canvas to simulate eye gaze points.",
+    "controls": {
+      "clearButton": "Clear Canvas",
+      "heatmapButton": "Toggle Heatmap",
+      "dotSizeLabel": "Dot Size:"
+    },
+    "statistics": {
+      "heading": "Statistics",
+      "pointCount": "Total Gaze Points:"
+    },
+    "about": {
+      "heading": "About Attention Dots",
+      "description": "Attention dots (or gaze points) represent where a user's eyes are focused on a screen. Eye-tracking technology is used in user experience research, medical diagnostics, and accessibility applications."
+    }
+  },
+  "imagePage1": {
+    "title": "Image Visualization 1",
+    "content": "Image 1 content will be loaded here..."
+  },
+  "imagePage2": {
+    "title": "Image Visualization 2",
+    "content": "Image 2 content will be loaded here..."
+  }
+}

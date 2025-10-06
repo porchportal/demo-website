@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medical Visualization Hub</title>
+    <title data-label="siteName">Medical Visualization Hub</title>
     <link rel="stylesheet" href="css/styles.css">
 
     <!-- GitHub Pages SPA Support Script -->
@@ -71,23 +71,24 @@
         </div>
     </div>
 
-    <!-- Image Pages -->
+    <!-- OpenMirai Page -->
     <div id="image1-page" class="page-content">
         <div class="container">
             <button class="back-button" onclick="navigateToPage('main')" data-label="navigation.backButton"></button>
-            <h1 data-label="imagePage1.title"></h1>
+            <h1>OpenMirai</h1>
             <div id="image1-content">
-                <p data-label="imagePage1.content"></p>
+                <p>Loading OpenMirai...</p>
             </div>
         </div>
     </div>
 
+    <!-- Lim Ayutthaya Page -->
     <div id="image2-page" class="page-content">
         <div class="container">
             <button class="back-button" onclick="navigateToPage('main')" data-label="navigation.backButton"></button>
-            <h1 data-label="imagePage2.title"></h1>
+            <h1>Lim Ayutthaya</h1>
             <div id="image2-content">
-                <p data-label="imagePage2.content"></p>
+                <p>Loading Lim Ayutthaya...</p>
             </div>
         </div>
     </div>
@@ -122,7 +123,7 @@
 
         // Navigation configuration
         const pages = {
-            'main': { id: 'main-menu', title: 'Medical Visualization Hub' },
+            'main': { id: 'main-menu', title: labels.siteName },
             'lvef': {
                 id: 'lvef-page',
                 title: 'LVEF Visualization',
@@ -140,8 +141,22 @@
                     initializeAttention();
                 }
             },
-            'image1': { id: 'image1-page', title: 'Image 1' },
-            'image2': { id: 'image2-page', title: 'Image 2' }
+            'image1': {
+                id: 'image1-page',
+                title: 'OpenMirai',
+                loader: async () => {
+                    const { initializeOpenMirai } = await import('./ts/openmirai.js');
+                    initializeOpenMirai();
+                }
+            },
+            'image2': {
+                id: 'image2-page',
+                title: 'Lim Ayutthaya',
+                loader: async () => {
+                    const { initializeLimAyutthaya } = await import('./ts/limayutthaya.js');
+                    initializeLimAyutthaya();
+                }
+            }
         };
 
         // Navigation system
