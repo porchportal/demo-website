@@ -54,14 +54,20 @@ export default function LVEFPage() {
 
   useEffect(() => {
     fetch('/assets/context/main_page.json')
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`)
+        return res.json()
+      })
       .then(data => setMainLabels(data))
-      .catch(err => console.error('Error loading labels:', err))
+      .catch(err => console.error('Error loading main_page.json:', err))
 
     fetch('/assets/context/lvef.json')
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`)
+        return res.json()
+      })
       .then(data => setLvefLabels(data))
-      .catch(err => console.error('Error loading LVEF labels:', err))
+      .catch(err => console.error('Error loading lvef.json:', err))
   }, [])
 
   const calculateLVEF = () => {
