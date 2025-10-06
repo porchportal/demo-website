@@ -35,7 +35,7 @@ export default function OpenMiraiPage() {
         <div className="page-wrapper">
           <div className="logo-container">
             <Image
-              src={getAssetPath("/public/assets/images/OpenMirai_logo.png")}
+              src={getAssetPath("/assets/images/OpenMirai_logo.png")}
               alt="OpenMirai"
               width={400}
               height={400}

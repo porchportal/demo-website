@@ -1,21 +1,54 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import mainPageData from '../../public/assets/context/main_page.json'
 import attentionData from '../../public/assets/context/attention.json'
+import './attention.css'
 
 interface AttentionLabels {
   subtitle: string
   description: string
-  controls: {
-    clearButton: string
-    heatmapButton: string
-    dotSizeLabel: string
+  images: {
+    enhanceScale: string
+    eyeTrackingPreview: string
+    webAdminConfig: string
+    webInterface: string
+    dataTableMAPE: string
+    dataTableRSquare: string
   }
-  statistics: {
+  executiveSummary: {
     heading: string
-    pointCount: string
+    content: string
+  }
+  researchObjective: {
+    heading: string
+    coreGoal: string
+    primaryImpact: string
+  }
+  methods: {
+    heading: string
+    note: string
+    steps: Array<{
+      title: string
+      description: string
+      substeps?: Array<{
+        title: string
+        description: string
+      }>
+    }>
+  }
+  results: {
+    heading: string
+    experiment: string
+    conclusion: string
+  }
+  projectStatus: {
+    heading: string
+    currentStatus: string
+    websiteRole: string
+    nextSteps: string
   }
   about: {
     heading: string
@@ -28,147 +61,231 @@ interface Labels {
   attentionPage: { title: string }
 }
 
-interface GazePoint {
-  x: number
-  y: number
-  timestamp: number
-}
-
 export default function AttentionPage() {
   const labels = mainPageData as Labels
   const attentionLabels = attentionData as AttentionLabels
-  const [gazePoints, setGazePoints] = useState<GazePoint[]>([])
-  const [dotSize, setDotSize] = useState(15)
-  const [showHeatmap, setShowHeatmap] = useState(false)
-  const [canvasRef, setCanvasRef] = useState<HTMLCanvasElement | null>(null)
+  const [activeSection, setActiveSection] = useState('introduction')
+  const [showToc, setShowToc] = useState(false)
 
-  useEffect(() => {
-    if (canvasRef) {
-      drawCanvas()
+  const scrollToSection = (sectionId: string) => {
+    setActiveSection(sectionId)
+    setShowToc(false)
+    const element = document.getElementById(sectionId)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
-  }, [gazePoints, dotSize, showHeatmap, canvasRef])
-
-  const handleCanvasClick = (e: React.MouseEvent<HTMLCanvasElement>) => {
-    if (!canvasRef) return
-    const rect = canvasRef.getBoundingClientRect()
-    const scaleX = canvasRef.width / rect.width
-    const scaleY = canvasRef.height / rect.height
-    const x = (e.clientX - rect.left) * scaleX
-    const y = (e.clientY - rect.top) * scaleY
-
-    setGazePoints([...gazePoints, { x, y, timestamp: Date.now() }])
   }
 
-  const drawCanvas = () => {
-    if (!canvasRef) return
-    const ctx = canvasRef.getContext('2d')
-    if (!ctx) return
-
-    ctx.clearRect(0, 0, canvasRef.width, canvasRef.height)
-
-    if (showHeatmap) {
-      gazePoints.forEach((point) => {
-        const gradient = ctx.createRadialGradient(point.x, point.y, 0, point.x, point.y, dotSize * 3)
-        gradient.addColorStop(0, 'rgba(255, 0, 0, 0.8)')
-        gradient.addColorStop(0.5, 'rgba(255, 255, 0, 0.4)')
-        gradient.addColorStop(1, 'rgba(255, 255, 0, 0)')
-        ctx.fillStyle = gradient
-        ctx.fillRect(point.x - dotSize * 3, point.y - dotSize * 3, dotSize * 6, dotSize * 6)
-      })
-    } else {
-      gazePoints.forEach((point) => {
-        const age = Date.now() - point.timestamp
-        const opacity = Math.max(0.3, 1 - age / 10000)
-
-        ctx.beginPath()
-        ctx.arc(point.x, point.y, dotSize, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(244, 63, 94, ${opacity})`
-        ctx.fill()
-        ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.8})`
-        ctx.lineWidth = 2
-        ctx.stroke()
-      })
-    }
+  const toggleToc = () => {
+    setShowToc(!showToc)
   }
 
   return (
-    <div className="page-content active">
-      <div className="container">
-        <Link href="/" className="back-button">{labels.navigation.backButton}</Link>
-        <h1>{labels.attentionPage.title}</h1>
+    <div className="paper-layout">
+      <Link href="/" className="back-button-paper">{labels.navigation.backButton}</Link>
 
-        <div style={{ padding: '20px' }}>
-          <h2>{attentionLabels.subtitle}</h2>
-          <p style={{ margin: '20px 0', lineHeight: 1.6 }}>{attentionLabels.description}</p>
+      {/* Mobile TOC Toggle Button */}
+      <button className="toc-toggle" onClick={toggleToc} aria-label="Toggle Table of Contents">
+        {showToc ? '✕' : '☰'}
+      </button>
 
-          <div style={{ background: '#f5f5f5', padding: '20px', borderRadius: '10px', margin: '20px 0' }}>
-            <canvas
-              ref={setCanvasRef}
-              width="700"
-              height="500"
-              onClick={handleCanvasClick}
-              style={{
-                border: '2px solid #ccc',
-                borderRadius: '10px',
-                cursor: 'crosshair',
-                display: 'block',
-                maxWidth: '100%',
-                background: 'white'
-              }}
-            />
+      {/* Overlay for mobile */}
+      <div className={`toc-overlay ${showToc ? 'show' : ''}`} onClick={() => setShowToc(false)}></div>
 
-            <div style={{ marginTop: '20px', display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-              <button
-                onClick={() => setGazePoints([])}
-                style={{
-                  background: '#ef4444',
-                  color: 'white',
-                  border: 'none',
-                  padding: '10px 20px',
-                  borderRadius: '5px',
-                  cursor: 'pointer'
-                }}
-              >
-                {attentionLabels.controls.clearButton}
-              </button>
-              <button
-                onClick={() => setShowHeatmap(!showHeatmap)}
-                style={{
-                  background: '#8b5cf6',
-                  color: 'white',
-                  border: 'none',
-                  padding: '10px 20px',
-                  borderRadius: '5px',
-                  cursor: 'pointer'
-                }}
-              >
-                {attentionLabels.controls.heatmapButton}
-              </button>
-              <label style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                {attentionLabels.controls.dotSizeLabel}
-                <input
-                  type="range"
-                  min="5"
-                  max="30"
-                  value={dotSize}
-                  onChange={(e) => setDotSize(parseInt(e.target.value))}
-                  style={{ width: '150px' }}
+      <div className="paper-container">
+        {/* Main Content */}
+        <main className="paper-content">
+          <header className="paper-header">
+            <div className="header-content">
+              <div className="header-text">
+                <h1>{labels.attentionPage.title}</h1>
+                <p className="paper-subtitle">{attentionLabels.subtitle}</p>
+              </div>
+            </div>
+          </header>
+
+          <section id="introduction" className="paper-section">
+            <h2>Introduction</h2>
+            <p>{attentionLabels.description}</p>
+            <div className="image-container">
+              <Image
+                src={attentionLabels.images.eyeTrackingPreview}
+                alt="Eye Tracking Preview"
+                width={800}
+                height={600}
+                className="section-image"
+              />
+            </div>
+          </section>
+
+          <section id="executive-summary" className="paper-section">
+            <h2>{attentionLabels.executiveSummary.heading}</h2>
+            <p>{attentionLabels.executiveSummary.content}</p>
+          </section>
+
+          <section id="research-objective" className="paper-section">
+            <h2>{attentionLabels.researchObjective.heading}</h2>
+            <ul>
+              <li><strong>Core Goal:</strong> {attentionLabels.researchObjective.coreGoal}</li>
+              <li><strong>Primary Impact:</strong> {attentionLabels.researchObjective.primaryImpact}</li>
+            </ul>
+          </section>
+
+          <section id="methods" className="paper-section">
+            <h2>{attentionLabels.methods.heading}</h2>
+            <p className="section-note">{attentionLabels.methods.note}</p>
+
+            <div className="image-container">
+              <Image
+                src={attentionLabels.images.enhanceScale}
+                alt="AI Enhancement Scale Process"
+                width={800}
+                height={600}
+                className="section-image"
+              />
+            </div>
+
+            <ul>
+              {attentionLabels.methods.steps.map((step, index) => (
+                <li key={index}>
+                  <strong>{step.title}:</strong> {step.description}
+                  {step.substeps && (
+                    <ul>
+                      {step.substeps.map((substep, subIndex) => (
+                        <li key={subIndex}>
+                          <strong>{substep.title}:</strong> {substep.description}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              ))}
+            </ul>
+
+            <div className="image-container">
+              <Image
+                src={attentionLabels.images.webInterface}
+                alt="Web Interface"
+                width={800}
+                height={10}
+                className="section-image"
+                style={{ objectFit: 'cover', objectPosition: 'top' }}
+              />
+            </div>
+
+            <div className="image-container">
+              <Image
+                src={attentionLabels.images.webAdminConfig}
+                alt="Web Admin Configuration"
+                width={800}
+                height={10}
+                className="section-image"
+                style={{ objectFit: 'cover', objectPosition: 'top' }}
+              />
+            </div>
+          </section>
+
+          <section id="results" className="paper-section">
+            <h2>{attentionLabels.results.heading}</h2>
+            <p>{attentionLabels.results.experiment}</p>
+
+            <div className="tables-container">
+              <div className="image-container">
+                <Image
+                  src={attentionLabels.images.dataTableMAPE}
+                  alt="MAPE Data Table"
+                  width={600}
+                  height={400}
+                  className="section-image"
                 />
-                <span>{dotSize}</span>
-              </label>
+              </div>
+
+              <div className="image-container">
+                <Image
+                  src={attentionLabels.images.dataTableRSquare}
+                  alt="R-Square Data Table"
+                  width={600}
+                  height={400}
+                  className="section-image"
+                />
+              </div>
             </div>
 
-            <div style={{ marginTop: '20px' }}>
-              <h3>{attentionLabels.statistics.heading}</h3>
-              <p>{attentionLabels.statistics.pointCount} {gazePoints.length}</p>
-            </div>
-          </div>
+            <p><strong>Conclusion:</strong> {attentionLabels.results.conclusion}</p>
+          </section>
 
-          <div style={{ marginTop: '30px' }}>
-            <h3>{attentionLabels.about.heading}</h3>
-            <p style={{ lineHeight: 1.6 }}>{attentionLabels.about.description}</p>
-          </div>
-        </div>
+          <section id="project-status" className="paper-section">
+            <h2>{attentionLabels.projectStatus.heading}</h2>
+            <ul>
+              <li><strong>Current Status:</strong> {attentionLabels.projectStatus.currentStatus}</li>
+              <li><strong>Website's Role (Experimental):</strong> {attentionLabels.projectStatus.websiteRole}</li>
+              <li><strong>Next Steps:</strong> {attentionLabels.projectStatus.nextSteps}</li>
+            </ul>
+          </section>
+
+          <section id="about" className="paper-section">
+            <div className="about-section">
+              <h3>{attentionLabels.about.heading}</h3>
+              <p>{attentionLabels.about.description}</p>
+            </div>
+          </section>
+        </main>
+
+        {/* Sidebar */}
+        <aside className={`paper-sidebar ${showToc ? 'show' : ''}`}>
+          <h3>Table of Contents</h3>
+          <nav>
+            <a
+              href="#introduction"
+              className={activeSection === 'introduction' ? 'active' : ''}
+              onClick={(e) => { e.preventDefault(); scrollToSection('introduction'); }}
+            >
+              Introduction
+            </a>
+            <a
+              href="#executive-summary"
+              className={activeSection === 'executive-summary' ? 'active' : ''}
+              onClick={(e) => { e.preventDefault(); scrollToSection('executive-summary'); }}
+            >
+              1. Executive Summary
+            </a>
+            <a
+              href="#research-objective"
+              className={activeSection === 'research-objective' ? 'active' : ''}
+              onClick={(e) => { e.preventDefault(); scrollToSection('research-objective'); }}
+            >
+              2. Research Objective
+            </a>
+            <a
+              href="#methods"
+              className={activeSection === 'methods' ? 'active' : ''}
+              onClick={(e) => { e.preventDefault(); scrollToSection('methods'); }}
+            >
+              3. Methods
+            </a>
+            <a
+              href="#results"
+              className={activeSection === 'results' ? 'active' : ''}
+              onClick={(e) => { e.preventDefault(); scrollToSection('results'); }}
+            >
+              4. Quantitative Results
+            </a>
+            <a
+              href="#project-status"
+              className={activeSection === 'project-status' ? 'active' : ''}
+              onClick={(e) => { e.preventDefault(); scrollToSection('project-status'); }}
+            >
+              5. Project Status
+            </a>
+            <a
+              href="#about"
+              className={activeSection === 'about' ? 'active' : ''}
+              onClick={(e) => { e.preventDefault(); scrollToSection('about'); }}
+            >
+              About
+            </a>
+          </nav>
+        </aside>
       </div>
     </div>
   )

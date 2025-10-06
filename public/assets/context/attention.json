@@ -1,7 +1,7 @@
 {
   "title": "Attention Dot Visualization",
   "loading": "Loading attention dot visualization...",
-  "subtitle": "Eye-Tracking Attention Visualization",
+  "subtitle": "A Framework for Enhanced Data Interpretation using AI Super-Resolution",
   "description": "This visualization demonstrates how attention dots work in eye-tracking technology. Click anywhere on the canvas to simulate eye gaze points.",
   "controls": {
     "clearButton": "Clear Canvas",
@@ -11,6 +11,76 @@
   "statistics": {
     "heading": "Statistics",
     "pointCount": "Total Gaze Points:"
+  },
+  "executiveSummary": {
+    "heading": "1. Executive Summary: The Business Case for AI Enhancement",
+    "content": "This project successfully integrates AI Super-Resolution (Real-ESRGAN) into the eye-tracking process to dramatically improve the predictive accuracy of where a user is looking, using only standard 1080p camera input. By upscaling the resolution by 4x, we confirmed a significant performance jump, with test R² reaching over 0.73 compared to a ≈ 0.34 baseline. This approach offers a cost-effective and high-accuracy solution, making advanced attention mapping accessible for wide-scale marketing and UI/UX optimization without specialized hardware."
+  },
+  "researchObjective": {
+    "heading": "2. Research Objective and Impact",
+    "coreGoal": "To develop a highly accurate Attention Dot Visualization tool using readily available, low-to-medium resolution cameras (1080p) to lower the barrier for commercial implementation.",
+    "primaryImpact": "Provide business strategists with data-driven confidence by significantly reducing the error (MAPE) and increasing the predictive power (R²) of the eye-tracking system."
+  },
+  "images": {
+    "enhanceScale": "/assets/image_eye/Enhance_image_scale.png",
+    "eyeTrackingPreview": "/assets/image_eye/EyeTracking_preview.png",
+    "webAdminConfig": "/assets/image_eye/Web_adminConfig.png",
+    "webInterface": "/assets/image_eye/Web_interface.png",
+    "dataTableMAPE": "/assets/image_eye/data_table_MAPE.png",
+    "dataTableRSquare": "/assets/image_eye/data_table_r-square.png"
+  },
+  "methods": {
+    "heading": "3. Methods: The AI Workflow (Bullet Points & Visual Focus)",
+    "note": "(This section should be heavily supported by images explaining the flow.)",
+    "steps": [
+      {
+        "title": "Step 1: Input Acquisition",
+        "description": "Video/images are captured via a 1080p camera."
+      },
+      {
+        "title": "Step 2: AI Pre-processing (The Game Changer)",
+        "description": "AI Pre-processing enhances image quality",
+        "substeps": [
+          {
+            "title": "Image Enhancement",
+            "description": "Raw images are fed into the Real-ESRGAN model."
+          },
+          {
+            "title": "Super-Resolution",
+            "description": "The AI intelligently upscales the resolution 4 times, focusing on recovering fine structural details critical for gaze estimation (e.g., pupil boundaries, corneal reflections)."
+          }
+        ]
+      },
+      {
+        "title": "Step 3: Feature Extraction and Modeling",
+        "description": "Advanced feature extraction and modeling",
+        "substeps": [
+          {
+            "title": "Spatial Features",
+            "description": "The 4x upscaled images are analyzed to extract spatial features of the eye and face."
+          },
+          {
+            "title": "Regression Analysis",
+            "description": "Multiple models were tested (Linear, Ridge, SVR, BAY-RIDE, ARD) with optimized hyperparameters to select the most robust and accurate predictor."
+          }
+        ]
+      },
+      {
+        "title": "Step 4: Cross-Validation",
+        "description": "The process confirmed that the Super-Resolution inputs consistently provided substantially higher predictive accuracy than the original, unenhanced data."
+      }
+    ]
+  },
+  "results": {
+    "heading": "4. Quantitative Results (Deep Technical Data)",
+    "experiment": "Our experiment used 900 images to compare performance.",
+    "conclusion": "The results are conclusive: higher resolution inputs, generated artificially by AI, are the most suitable choice for achieving better accuracy and lower error in webcam-based eye-tracking systems."
+  },
+  "projectStatus": {
+    "heading": "5. Project Status and Future Direction",
+    "currentStatus": "This initial project has just been completed (finished a week ago), and the results are highly encouraging.",
+    "websiteRole": "This website is an experimental platform designed to collect more dataset from various user interactions. This data is crucial for future experiments, increasing the model's robustness and generalization ability across different lighting conditions and hardware.",
+    "nextSteps": "We are actively moving to another research project to further refine the model's lightweight nature and real-time performance."
   },
   "about": {
     "heading": "About Attention Dots",

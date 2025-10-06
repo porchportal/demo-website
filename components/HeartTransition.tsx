@@ -60,7 +60,7 @@ export default function HeartTransition() {
   return (
     <div className={`heart-transition ${animationStage || ''}`} style={style}>
       <Image
-        src={getAssetPath("/public/assets/image_medical/lvef_3d_.png")}
+        src={getAssetPath("/assets/image_medical/lvef_3d_.png")}
         alt="Heart Transition"
         width={300}
         height={300}

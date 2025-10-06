@@ -36,7 +36,7 @@ export default function Home() {
           </Link>
           <Link href="/openmirai" className="nav-button image-button">
             <Image
-              src={getAssetPath("/public/assets/images/OpenMirai_logo.png")}
+              src={getAssetPath("/assets/images/OpenMirai_logo.png")}
               alt="OpenMirai"
               width={200}
               height={200}
@@ -44,7 +44,7 @@ export default function Home() {
           </Link>
           <Link href="/limayutthaya" className="nav-button image-button">
             <Image
-              src={getAssetPath("/public/assets/images/LimAyutthaya_logo.jpg")}
+              src={getAssetPath("/assets/images/LimAyutthaya_logo.jpg")}
               alt="Lim Ayutthaya"
               width={200}
               height={200}
