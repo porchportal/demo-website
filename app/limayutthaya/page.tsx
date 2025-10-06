@@ -1,9 +1,10 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { getAssetPath } from '../../lib/utils'
+import mainPageData from '../../public/assets/context/main_page.json'
+import limayutthayaData from '../../public/assets/context/limayutthaya.json'
 
 interface LimAyutthayaLabels {
   title: string
@@ -19,22 +20,8 @@ interface Labels {
 }
 
 export default function LimAyutthayaPage() {
-  const [labels, setLabels] = useState<Labels | null>(null)
-  const [pageLabels, setPageLabels] = useState<LimAyutthayaLabels | null>(null)
-
-  useEffect(() => {
-    fetch(getAssetPath('/assets/context/main_page.json'))
-      .then(res => res.json())
-      .then(data => setLabels(data))
-      .catch(err => console.error('Error loading labels:', err))
-
-    fetch(getAssetPath('/assets/context/limayutthaya.json'))
-      .then(res => res.json())
-      .then(data => setPageLabels(data))
-      .catch(err => console.error('Error loading page labels:', err))
-  }, [])
-
-  if (!labels || !pageLabels) return <div>Loading...</div>
+  const labels = mainPageData as Labels
+  const pageLabels = limayutthayaData as LimAyutthayaLabels
 
   return (
     <div className="page-content active">

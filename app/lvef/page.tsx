@@ -1,9 +1,11 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import './lvef.css'
 import { getAssetPath } from '../../lib/utils'
+import mainPageData from '../../public/assets/context/main_page.json'
+import lvefData from '../../public/assets/context/lvef.json'
 
 interface LVEFLabels {
   title: string
@@ -45,31 +47,13 @@ interface LVEFLabels {
 }
 
 export default function LVEFPage() {
-  const [mainLabels, setMainLabels] = useState<{ navigation: { backButton: string } } | null>(null)
-  const [lvefLabels, setLvefLabels] = useState<LVEFLabels | null>(null)
+  const mainLabels = mainPageData as { navigation: { backButton: string } }
+  const lvefLabels = lvefData as LVEFLabels
   const [edv, setEdv] = useState('')
   const [esv, setEsv] = useState('')
   const [result, setResult] = useState<{ lvef: number; category: string; color: string } | null>(null)
   const [error, setError] = useState('')
   const [activeSection, setActiveSection] = useState('overview')
-
-  useEffect(() => {
-    fetch(getAssetPath('/assets/context/main_page.json'))
-      .then(res => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`)
-        return res.json()
-      })
-      .then(data => setMainLabels(data))
-      .catch(err => console.error('Error loading main_page.json:', err))
-
-    fetch(getAssetPath('/assets/context/lvef.json'))
-      .then(res => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`)
-        return res.json()
-      })
-      .then(data => setLvefLabels(data))
-      .catch(err => console.error('Error loading lvef.json:', err))
-  }, [])
 
   const calculateLVEF = () => {
     setError('')
@@ -102,8 +86,6 @@ export default function LVEFPage() {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
   }
-
-  if (!mainLabels || !lvefLabels) return <div>Loading...</div>
 
   return (
     <div className="paper-layout">

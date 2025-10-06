@@ -1,8 +1,9 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { getAssetPath } from '../../lib/utils'
+import mainPageData from '../../public/assets/context/main_page.json'
+import attentionData from '../../public/assets/context/attention.json'
 
 interface AttentionLabels {
   subtitle: string
@@ -34,24 +35,12 @@ interface GazePoint {
 }
 
 export default function AttentionPage() {
-  const [labels, setLabels] = useState<Labels | null>(null)
-  const [attentionLabels, setAttentionLabels] = useState<AttentionLabels | null>(null)
+  const labels = mainPageData as Labels
+  const attentionLabels = attentionData as AttentionLabels
   const [gazePoints, setGazePoints] = useState<GazePoint[]>([])
   const [dotSize, setDotSize] = useState(15)
   const [showHeatmap, setShowHeatmap] = useState(false)
   const [canvasRef, setCanvasRef] = useState<HTMLCanvasElement | null>(null)
-
-  useEffect(() => {
-    fetch(getAssetPath('/assets/context/main_page.json'))
-      .then(res => res.json())
-      .then(data => setLabels(data))
-      .catch(err => console.error('Error loading labels:', err))
-
-    fetch(getAssetPath('/assets/context/attention.json'))
-      .then(res => res.json())
-      .then(data => setAttentionLabels(data))
-      .catch(err => console.error('Error loading attention labels:', err))
-  }, [])
 
   useEffect(() => {
     if (canvasRef) {
@@ -101,8 +90,6 @@ export default function AttentionPage() {
       })
     }
   }
-
-  if (!labels || !attentionLabels) return <div>Loading...</div>
 
   return (
     <div className="page-content active">
