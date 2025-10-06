@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { getAssetPath } from '../../lib/utils'
 import mainPageData from '../../public/assets/context/main_page.json'
 import attentionData from '../../public/assets/context/attention.json'
 import './attention.css'
@@ -127,7 +128,7 @@ export default function AttentionPage() {
             <p>{attentionLabels.description}</p>
             <div className="image-container">
               <Image
-                src={attentionLabels.images.eyeTrackingPreview}
+                src={getAssetPath(attentionLabels.images.eyeTrackingPreview)}
                 alt="Eye Tracking Preview"
                 width={800}
                 height={600}
@@ -155,7 +156,7 @@ export default function AttentionPage() {
 
             <div className="image-container">
               <Image
-                src={attentionLabels.images.enhanceScale}
+                src={getAssetPath(attentionLabels.images.enhanceScale)}
                 alt="AI Enhancement Scale Process"
                 width={800}
                 height={200}
@@ -182,7 +183,7 @@ export default function AttentionPage() {
 
             <div className="image-container">
               <Image
-                src={attentionLabels.images.webInterface}
+                src={getAssetPath(attentionLabels.images.webInterface)}
                 alt="Web Interface"
                 width={800}
                 height={200}
@@ -192,7 +193,7 @@ export default function AttentionPage() {
 
             <div className="image-container">
               <Image
-                src={attentionLabels.images.webAdminConfig}
+                src={getAssetPath(attentionLabels.images.webAdminConfig)}
                 alt="Web Admin Configuration"
                 width={800}
                 height={200}
@@ -241,7 +242,7 @@ export default function AttentionPage() {
             <div className="tables-container">
               <div className="image-container">
                 <Image
-                  src={attentionLabels.images.dataTableMAPE}
+                  src={getAssetPath(attentionLabels.images.dataTableMAPE)}
                   alt="MAPE Data Table"
                   width={600}
                   height={400}
@@ -251,7 +252,7 @@ export default function AttentionPage() {
 
               <div className="image-container">
                 <Image
-                  src={attentionLabels.images.dataTableRSquare}
+                  src={getAssetPath(attentionLabels.images.dataTableRSquare)}
                   alt="R-Square Data Table"
                   width={600}
                   height={400}
