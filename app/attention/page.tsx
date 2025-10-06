@@ -10,6 +10,24 @@ import './attention.css'
 interface AttentionLabels {
   subtitle: string
   description: string
+  introduction: {
+    heading: string
+  }
+  github: {
+    buttonText: string
+    url: string
+    credit: string
+  }
+  tableOfContents: {
+    heading: string
+    introduction: string
+    executiveSummary: string
+    researchObjective: string
+    methods: string
+    results: string
+    projectStatus: string
+    about: string
+  }
   images: {
     enhanceScale: string
     eyeTrackingPreview: string
@@ -105,7 +123,7 @@ export default function AttentionPage() {
           </header>
 
           <section id="introduction" className="paper-section">
-            <h2>Introduction</h2>
+            <h2>{attentionLabels.introduction.heading}</h2>
             <p>{attentionLabels.description}</p>
             <div className="image-container">
               <Image
@@ -140,8 +158,8 @@ export default function AttentionPage() {
                 src={attentionLabels.images.enhanceScale}
                 alt="AI Enhancement Scale Process"
                 width={800}
-                height={600}
-                className="section-image"
+                height={200}
+                className="section-image cropped-web-image"
               />
             </div>
 
@@ -167,9 +185,8 @@ export default function AttentionPage() {
                 src={attentionLabels.images.webInterface}
                 alt="Web Interface"
                 width={800}
-                height={10}
-                className="section-image"
-                style={{ objectFit: 'cover', objectPosition: 'top' }}
+                height={200}
+                className="section-image cropped-web-image"
               />
             </div>
 
@@ -178,10 +195,42 @@ export default function AttentionPage() {
                 src={attentionLabels.images.webAdminConfig}
                 alt="Web Admin Configuration"
                 width={800}
-                height={10}
-                className="section-image"
-                style={{ objectFit: 'cover', objectPosition: 'top' }}
+                height={200}
+                className="section-image cropped-web-image"
               />
+            </div>
+
+            <div style={{ marginTop: '20px', textAlign: 'center' }}>
+              <a
+                href={attentionLabels.github.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  padding: '10px 20px',
+                  background: '#667eea',
+                  color: 'white',
+                  textDecoration: 'none',
+                  borderRadius: '5px',
+                  fontWeight: '500',
+                  fontSize: '14px',
+                  transition: 'background 0.3s ease'
+                }}
+                onMouseOver={(e) => e.currentTarget.style.background = '#5568d3'}
+                onMouseOut={(e) => e.currentTarget.style.background = '#667eea'}
+              >
+                {attentionLabels.github.buttonText}
+              </a>
+              <p style={{
+                marginTop: '15px',
+                fontSize: '14px',
+                color: '#666',
+                fontStyle: 'italic'
+              }}>
+                {attentionLabels.github.credit}
+              </p>
             </div>
           </section>
 
@@ -233,56 +282,56 @@ export default function AttentionPage() {
 
         {/* Sidebar */}
         <aside className={`paper-sidebar ${showToc ? 'show' : ''}`}>
-          <h3>Table of Contents</h3>
+          <h3>{attentionLabels.tableOfContents.heading}</h3>
           <nav>
             <a
               href="#introduction"
               className={activeSection === 'introduction' ? 'active' : ''}
               onClick={(e) => { e.preventDefault(); scrollToSection('introduction'); }}
             >
-              Introduction
+              {attentionLabels.tableOfContents.introduction}
             </a>
             <a
               href="#executive-summary"
               className={activeSection === 'executive-summary' ? 'active' : ''}
               onClick={(e) => { e.preventDefault(); scrollToSection('executive-summary'); }}
             >
-              1. Executive Summary
+              {attentionLabels.tableOfContents.executiveSummary}
             </a>
             <a
               href="#research-objective"
               className={activeSection === 'research-objective' ? 'active' : ''}
               onClick={(e) => { e.preventDefault(); scrollToSection('research-objective'); }}
             >
-              2. Research Objective
+              {attentionLabels.tableOfContents.researchObjective}
             </a>
             <a
               href="#methods"
               className={activeSection === 'methods' ? 'active' : ''}
               onClick={(e) => { e.preventDefault(); scrollToSection('methods'); }}
             >
-              3. Methods
+              {attentionLabels.tableOfContents.methods}
             </a>
             <a
               href="#results"
               className={activeSection === 'results' ? 'active' : ''}
               onClick={(e) => { e.preventDefault(); scrollToSection('results'); }}
             >
-              4. Quantitative Results
+              {attentionLabels.tableOfContents.results}
             </a>
             <a
               href="#project-status"
               className={activeSection === 'project-status' ? 'active' : ''}
               onClick={(e) => { e.preventDefault(); scrollToSection('project-status'); }}
             >
-              5. Project Status
+              {attentionLabels.tableOfContents.projectStatus}
             </a>
             <a
               href="#about"
               className={activeSection === 'about' ? 'active' : ''}
               onClick={(e) => { e.preventDefault(); scrollToSection('about'); }}
             >
-              About
+              {attentionLabels.tableOfContents.about}
             </a>
           </nav>
         </aside>

@@ -4,15 +4,61 @@
 }
 
 .logo-container {
-  margin-bottom: 30px;
+  margin-bottom: 15px;
+  position: relative;
+  display: inline-block;
+  padding: 4px;
+}
+
+.logo-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 80%;
+  padding: 0.5px;
+  background: conic-gradient(
+    from 0deg,
+    #22c55e,
+    #3b82f6,
+    #15803d,
+    #3b82f6,
+    #22c55e
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: rotateGradientOpenMirai 3s linear infinite;
+}
+
+@keyframes rotateGradientOpenMirai {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .logo-image {
   max-width: 400px;
   width: 100%;
   height: auto;
-  border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  position: relative;
+  display: block;
+  animation: colorShadowOpenMirai 3s linear infinite;
+}
+
+@keyframes colorShadowOpenMirai {
+  0%, 100% {
+    box-shadow: 0 0 60pt rgba(34, 197, 94, 0.6);
+  }
+  33% {
+    box-shadow: 0 0 60pt rgba(59, 130, 246, 0.6);
+  }
+  66% {
+    box-shadow: 0 0 60pt rgba(21, 128, 61, 0.6);
+  }
 }
 
 .page-title {
@@ -94,8 +140,24 @@
     padding: 15px;
   }
 
+  .logo-container {
+    padding: 3px;
+  }
+
   .logo-image {
-    max-width: 300px;
+    max-width: 250px;
+  }
+
+  @keyframes colorShadowOpenMirai {
+    0%, 100% {
+      box-shadow: 0 0 30pt rgba(34, 197, 94, 0.6);
+    }
+    33% {
+      box-shadow: 0 0 30pt rgba(59, 130, 246, 0.6);
+    }
+    66% {
+      box-shadow: 0 0 30pt rgba(21, 128, 61, 0.6);
+    }
   }
 
   .button-container {
@@ -116,8 +178,25 @@
     padding: 10px;
   }
 
+  .logo-container {
+    padding: 2px;
+    margin-bottom: 20px;
+  }
+
   .logo-image {
-    max-width: 250px;
+    max-width: 180px;
+  }
+
+  @keyframes colorShadowOpenMirai {
+    0%, 100% {
+      box-shadow: 0 0 15pt rgba(34, 197, 94, 0.6);
+    }
+    33% {
+      box-shadow: 0 0 15pt rgba(59, 130, 246, 0.6);
+    }
+    66% {
+      box-shadow: 0 0 15pt rgba(21, 128, 61, 0.6);
+    }
   }
 
   .button-container {

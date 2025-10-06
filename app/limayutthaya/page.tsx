@@ -41,7 +41,6 @@ export default function LimAyutthayaPage() {
             />
           </div>
 
-          <h2 className="page-title">{pageLabels.title}</h2>
           <p className="description">
             {pageLabels.description}
           </p>

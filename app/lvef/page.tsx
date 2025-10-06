@@ -301,11 +301,11 @@ export default function LVEFPage() {
             <h2>{lvefLabels.sections.overview.title}</h2>
             <p className="section-subtitle">{lvefLabels.sections.overview.subtitle}</p>
 
-            <div className="medical-image-container">
+            <div className="medical-image-container cropped-image-container">
               <img
                 src={getAssetPath(lvefLabels.images.coReEcho)}
                 alt="CoReEcho Visualization"
-                className="medical-image"
+                className="medical-image cropped-image"
               />
               <p className="image-caption">Figure 1: CoReEcho - Echocardiographic Analysis</p>
             </div>
@@ -341,11 +341,11 @@ export default function LVEFPage() {
             </ul>
             <p className="outcome-highlight"><strong>🧠 Outcome:</strong> {lvefLabels.sections.gradcam.outcome}</p>
 
-            <div className="medical-image-container compact">
+            <div className="medical-image-container cropped-image-container">
               <img
                 src={getAssetPath(lvefLabels.images.gradCam)}
                 alt="Grad-CAM Visualization"
-                className="medical-image"
+                className="medical-image cropped-image"
               />
               <p className="image-caption">Figure 2: Gradient-weighted Class Activation Mapping (Grad-CAM)</p>
             </div>

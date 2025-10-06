@@ -28,8 +28,8 @@ body {
 h1 {
     text-align: center;
     color: #333;
-    margin-bottom: 40px;
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    margin-bottom: 10px;
+    font-size: clamp(2rem, 5vw, 3.5rem);
 }
 
 .button-grid {
@@ -175,9 +175,13 @@ h1 {
 
 /* Responsive design */
 @media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
     .container {
         padding: 20px;
-        margin: 10px;
+        margin: 0;
     }
 
     .button-grid {
@@ -194,6 +198,15 @@ h1 {
 }
 
 @media (max-width: 480px) {
+    body {
+        padding: 5px;
+    }
+
+    .container {
+        padding: 15px;
+        margin: 0;
+    }
+
     .button-grid {
         gap: 10px;
     }
@@ -223,19 +236,21 @@ h1 {
 }
 
 .back-button {
-    background: #666;
-    color: white;
+    background: transparent;
+    color: black;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 12px 24px;
+    border-radius: 10px;
     cursor: pointer;
     margin-bottom: 20px;
     font-size: clamp(0.9rem, 2vw, 1rem);
-    transition: background 0.3s ease;
+    transition: all 0.3s ease;
     text-decoration: none;
     display: inline-block;
+    font-weight: 600;
 }
 
 .back-button:hover {
-    background: #555;
+    transform: translateY(-2px);
+    opacity: 0.8;
 }

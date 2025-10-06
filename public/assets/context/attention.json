@@ -3,6 +3,24 @@
   "loading": "Loading attention dot visualization...",
   "subtitle": "A Framework for Enhanced Data Interpretation using AI Super-Resolution",
   "description": "This visualization demonstrates how attention dots work in eye-tracking technology. Click anywhere on the canvas to simulate eye gaze points.",
+  "introduction": {
+    "heading": "Introduction"
+  },
+  "github": {
+    "buttonText": "💻 GitHub Repository",
+    "url": "https://github.com/porchportal/Main_Web_EyeTracking",
+    "credit": "Developed under NECTEC IPU Lab (National Electronics and Computer Technology Center - IPU Laboratory), Thailand."
+  },
+  "tableOfContents": {
+    "heading": "Table of Contents",
+    "introduction": "Introduction",
+    "executiveSummary": "1. Executive Summary",
+    "researchObjective": "2. Research Objective",
+    "methods": "3. Methods",
+    "results": "4. Quantitative Results",
+    "projectStatus": "5. Project Status",
+    "about": "About"
+  },
   "controls": {
     "clearButton": "Clear Canvas",
     "heatmapButton": "Toggle Heatmap",

@@ -4,15 +4,58 @@
 }
 
 .logo-container {
-  margin-bottom: 30px;
+  margin-bottom: 15px;
+  position: relative;
+  display: inline-block;
+  padding: 4px;
+}
+
+.logo-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  padding: 5px;
+  background: conic-gradient(
+    from 0deg,
+    #ef4444,
+    #fbbf24,
+    #dc2626,
+    #fbbf24,
+    #ef4444
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: rotateGradientLimAyutthaya 3s linear infinite;
+}
+
+@keyframes rotateGradientLimAyutthaya {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .logo-image {
   max-width: 400px;
   width: 100%;
   height: auto;
-  border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  position: relative;
+  display: block;
+  animation: colorShadowLimAyutthaya 3s linear infinite;
+}
+
+@keyframes colorShadowLimAyutthaya {
+  0%, 100% {
+    box-shadow: 0 0 60pt rgba(239, 68, 68, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 60pt rgba(251, 191, 36, 0.6);
+  }
 }
 
 .page-title {
@@ -73,8 +116,21 @@
     padding: 15px;
   }
 
+  .logo-container {
+    padding: 3px;
+  }
+
   .logo-image {
-    max-width: 300px;
+    max-width: 250px;
+  }
+
+  @keyframes colorShadowLimAyutthaya {
+    0%, 100% {
+      box-shadow: 0 0 30pt rgba(239, 68, 68, 0.6);
+    }
+    50% {
+      box-shadow: 0 0 30pt rgba(251, 191, 36, 0.6);
+    }
   }
 
   .social-button {
@@ -91,8 +147,22 @@
     padding: 10px;
   }
 
+  .logo-container {
+    padding: 2px;
+    margin-bottom: 20px;
+  }
+
   .logo-image {
-    max-width: 250px;
+    max-width: 180px;
+  }
+
+  @keyframes colorShadowLimAyutthaya {
+    0%, 100% {
+      box-shadow: 0 0 15pt rgba(239, 68, 68, 0.6);
+    }
+    50% {
+      box-shadow: 0 0 15pt rgba(251, 191, 36, 0.6);
+    }
   }
 
   .social-button {
