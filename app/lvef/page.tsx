@@ -5,6 +5,7 @@ import Link from 'next/link'
 import './lvef.css'
 
 interface LVEFLabels {
+  title: string
   subtitle: string
   description: string
   form: {
@@ -40,11 +41,6 @@ interface LVEFLabels {
       description: string
     }
   }
-}
-
-interface Labels {
-  navigation: { backButton: string }
-  lvefPage: LVEFLabels & { title: string }
 }
 
 export default function LVEFPage() {
