@@ -1,0 +1,14 @@
+# Node modules
+node_modules/
+
+# TypeScript source maps and declarations (but keep .js files)
+*.js.map
+*.d.ts
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
