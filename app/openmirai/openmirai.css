@@ -1,0 +1,140 @@
+.page-wrapper {
+  padding: 20px;
+  text-align: center;
+}
+
+.logo-container {
+  margin-bottom: 30px;
+}
+
+.logo-image {
+  max-width: 400px;
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.page-title {
+  color: #333;
+  margin-bottom: 20px;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+}
+
+.description {
+  line-height: 1.8;
+  color: #666;
+  margin-bottom: 30px;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+}
+
+.button-container {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.social-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  padding: 15px 30px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+}
+
+.website-button {
+  background: #667eea;
+}
+
+.website-button:hover {
+  background: #5568d3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.facebook-button {
+  background: #1877f2;
+}
+
+.facebook-button:hover {
+  background: #166fe5;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(24, 119, 242, 0.3);
+}
+
+.info-section {
+  margin-top: 40px;
+  padding: 20px;
+  background: #f5f5f5;
+  border-radius: 10px;
+}
+
+.info-heading {
+  color: #333;
+  margin-bottom: 15px;
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+}
+
+.info-text {
+  color: #666;
+  line-height: 1.6;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .page-wrapper {
+    padding: 15px;
+  }
+
+  .logo-image {
+    max-width: 300px;
+  }
+
+  .button-container {
+    gap: 10px;
+  }
+
+  .social-button {
+    padding: 12px 24px;
+  }
+
+  .info-section {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-wrapper {
+    padding: 10px;
+  }
+
+  .logo-image {
+    max-width: 250px;
+  }
+
+  .button-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .social-button {
+    padding: 10px 20px;
+    gap: 8px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .info-section {
+    margin-top: 30px;
+    padding: 15px;
+  }
+}

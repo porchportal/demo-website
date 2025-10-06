@@ -1,11 +1,12 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import './lvef.css'
 import { getAssetPath } from '../../lib/utils'
 import mainPageData from '../../public/assets/context/main_page.json'
 import lvefData from '../../public/assets/context/lvef.json'
+import HeartTransition from '../../components/HeartTransition'
 
 interface LVEFLabels {
   title: string
@@ -26,6 +27,7 @@ interface LVEFLabels {
     reduced: string
   }
   images: {
+    heartModel: string
     coReEcho: string
     gradCam: string
     tableExperimental: string
@@ -89,6 +91,8 @@ export default function LVEFPage() {
 
   return (
     <div className="paper-layout">
+      <HeartTransition />
+
       <Link href="/" className="back-button-paper">{mainLabels.navigation.backButton}</Link>
 
       <div className="paper-container">
@@ -137,8 +141,19 @@ export default function LVEFPage() {
         {/* Main Content */}
         <main className="paper-content">
           <header className="paper-header">
-            <h1>{lvefLabels.title}</h1>
-            <p className="paper-subtitle">{lvefLabels.subtitle}</p>
+            <div className="header-content">
+              <div className="header-text">
+                <h1>{lvefLabels.title}</h1>
+                <p className="paper-subtitle">{lvefLabels.subtitle}</p>
+              </div>
+              <div className="header-image-container" id="heart-image-target">
+                <img
+                  src={getAssetPath(lvefLabels.images.heartModel)}
+                  alt="Heart Model"
+                  className="header-heart-image"
+                />
+              </div>
+            </div>
           </header>
 
           <section id="overview" className="paper-section">

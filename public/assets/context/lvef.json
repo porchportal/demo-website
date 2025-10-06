@@ -18,6 +18,7 @@
     "reduced": "Reduced: <40%"
   },
   "images": {
+    "heartModel": "/assets/image_medical/lvef_3d_.png",
     "coReEcho": "/assets/image_medical/CoReEcho.png",
     "gradCam": "/assets/image_medical/GradCam.png",
     "tableExperimental": "/assets/image_medical/table_experimental.png"

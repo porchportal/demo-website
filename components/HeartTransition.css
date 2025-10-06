@@ -1,0 +1,61 @@
+.heart-transition {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  width: 300px;
+  height: 300px;
+  transform: translate(-50%, -50%) scale(0);
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.heart-transition.popup {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+
+.heart-transition.move {
+  position: absolute;
+  transform: none;
+  opacity: 1;
+  transition: all 1.2s cubic-bezier(0.34, 1.2, 0.64, 1);
+}
+
+.heart-transition img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 40px rgba(102, 126, 234, 0.7));
+}
+
+.heart-transition.popup img {
+  animation: heartPopup 0.5s ease-out;
+}
+
+.heart-transition.move img {
+  filter: drop-shadow(0 5px 25px rgba(102, 126, 234, 0.5));
+}
+
+@keyframes heartPopup {
+  0% {
+    transform: scale(0.5);
+    filter: drop-shadow(0 5px 20px rgba(102, 126, 234, 0.4));
+  }
+  50% {
+    transform: scale(1.1);
+    filter: drop-shadow(0 15px 50px rgba(102, 126, 234, 0.9));
+  }
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 10px 40px rgba(102, 126, 234, 0.7));
+  }
+}
+
+@media (max-width: 768px) {
+  .heart-transition {
+    width: 250px;
+    height: 250px;
+  }
+}

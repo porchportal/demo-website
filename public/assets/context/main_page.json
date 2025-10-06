@@ -7,7 +7,7 @@
     "title": "Medical Visualization Hub",
     "buttons": {
       "lvef": "Left Ventricular Ejection Fraction (LVEF)",
-      "attention": "Attention Dot Visualization in Eye-Tracking",
+      "attention": "Attention Dot Visualization in\nEye-Tracking",
       "image1": "Image 1",
       "image2": "Image 2"
     }

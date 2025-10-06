@@ -19,16 +19,20 @@ interface Labels {
 export default function Home() {
   const labels = labelsData as Labels
 
+  const handleLVEFClick = (e: React.MouseEvent) => {
+    sessionStorage.setItem('heartAnimation', 'start')
+  }
+
   return (
     <div className="page-content active">
       <div className="container">
         <h1>{labels.mainMenu.title}</h1>
         <div className="button-grid">
-          <Link href="/lvef" className="nav-button lvef-button">
-            {labels.mainMenu.buttons.lvef}
+          <Link href="/lvef" className="nav-button lvef-button" onClick={handleLVEFClick}>
+            <span>{labels.mainMenu.buttons.lvef}</span>
           </Link>
           <Link href="/attention" className="nav-button attention-button">
-            {labels.mainMenu.buttons.attention}
+            <span>{labels.mainMenu.buttons.attention}</span>
           </Link>
           <Link href="/openmirai" className="nav-button image-button">
             <Image

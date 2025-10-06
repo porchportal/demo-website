@@ -85,6 +85,32 @@
   border-bottom: 3px solid #667eea;
   padding-bottom: 20px;
   margin-bottom: 40px;
+  position: relative;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.header-text {
+  flex: 1;
+}
+
+.header-image-container {
+  width: 120px;
+  height: 120px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.header-heart-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 5px 25px rgba(102, 126, 234, 0.5));
 }
 
 .paper-header h1 {
@@ -318,6 +344,17 @@ html {
 
   .paper-content {
     padding: 20px 15px;
+  }
+
+  .header-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-image-container {
+    width: 100px;
+    height: 100px;
+    align-self: center;
   }
 
   .paper-header h1 {
