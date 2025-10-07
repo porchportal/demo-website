@@ -1,0 +1,36 @@
+# Cache static assets for GitHub Pages
+# This file works with some static hosting providers
+
+# Images - cache for 1 year
+/assets/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/image_medical/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/image_eye/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# CSS and JS files - cache for 1 month
+/*.css
+  Cache-Control: public, max-age=2592000
+
+/*.js
+  Cache-Control: public, max-age=2592000
+
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# JSON context files - cache for 1 day
+/assets/context/*
+  Cache-Control: public, max-age=86400
+
+# HTML files - no cache
+/*.html
+  Cache-Control: no-cache, no-store, must-revalidate
+
+# Security headers for all files
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  X-XSS-Protection: 1; mode=block

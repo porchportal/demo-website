@@ -134,6 +134,8 @@ export default function AttentionPage() {
                 width={800}
                 height={600}
                 className="section-image"
+                priority
+                unoptimized
               />
             </div>
           </section>
@@ -162,6 +164,8 @@ export default function AttentionPage() {
                 width={800}
                 height={200}
                 className="section-image cropped-web-image enhance-scale-image"
+                loading="lazy"
+                unoptimized
               />
             </div>
 
@@ -189,6 +193,8 @@ export default function AttentionPage() {
                 width={800}
                 height={200}
                 className="section-image cropped-web-image"
+                loading="lazy"
+                unoptimized
               />
             </div>
 
@@ -199,6 +205,8 @@ export default function AttentionPage() {
                 width={800}
                 height={200}
                 className="section-image cropped-web-image"
+                loading="lazy"
+                unoptimized
               />
             </div>
 
@@ -248,6 +256,8 @@ export default function AttentionPage() {
                   width={600}
                   height={400}
                   className="section-image data-table-image"
+                  loading="lazy"
+                  unoptimized
                 />
               </div>
 
@@ -258,6 +268,8 @@ export default function AttentionPage() {
                   width={600}
                   height={400}
                   className="section-image data-table-image"
+                  loading="lazy"
+                  unoptimized
                 />
               </div>
             </div>

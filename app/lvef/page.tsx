@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import './lvef.css'
 import { getAssetPath } from '../../lib/utils'
 import mainPageData from '../../public/assets/context/main_page.json'
@@ -197,10 +198,14 @@ export default function LVEFPage() {
                 <p className="paper-subtitle">{lvefLabels.subtitle}</p>
               </div>
               <div className="header-image-container" id="heart-image-target">
-                <img
+                <Image
                   src={getAssetPath(lvefLabels.images.heartModel)}
                   alt="Heart Model"
                   className="header-heart-image"
+                  width={400}
+                  height={400}
+                  priority
+                  unoptimized
                 />
               </div>
             </div>
@@ -217,28 +222,40 @@ export default function LVEFPage() {
             <div className="medical-image-container">
               <div style={{ display: 'flex', gap: '15px', flexWrap: 'wrap', justifyContent: 'center' }}>
                 <div style={{ flex: '1 1 200px', maxWidth: '280px' }}>
-                  <img
+                  <Image
                     src={getAssetPath(lvefLabels.images.dataDemoImage)}
                     alt="Dataset Demo Image"
                     className="medical-image"
+                    width={280}
+                    height={280}
+                    loading="lazy"
+                    unoptimized
                     style={{ width: '100%', height: 'auto' }}
                   />
                   <p className="image-caption">Figure 3: Dataset Example - Echocardiographic Frame</p>
                 </div>
                 <div style={{ flex: '1 1 200px', maxWidth: '280px' }}>
-                  <img
+                  <Image
                     src={getAssetPath(lvefLabels.images.dataDemo1Gif)}
                     alt="Dataset Demo Animation 1"
                     className="medical-image"
+                    width={280}
+                    height={280}
+                    loading="lazy"
+                    unoptimized
                     style={{ width: '100%', height: 'auto' }}
                   />
                   <p className="image-caption">Figure 4: Cardiac Cycle Animation - Example 1</p>
                 </div>
                 <div style={{ flex: '1 1 200px', maxWidth: '280px' }}>
-                  <img
+                  <Image
                     src={getAssetPath(lvefLabels.images.dataDemo2Gif)}
                     alt="Dataset Demo Animation 2"
                     className="medical-image"
+                    width={280}
+                    height={280}
+                    loading="lazy"
+                    unoptimized
                     style={{ width: '100%', height: 'auto' }}
                   />
                   <p className="image-caption">Figure 5: Cardiac Cycle Animation - Example 2</p>
@@ -249,11 +266,15 @@ export default function LVEFPage() {
             <p>{lvefLabels.sections.dataset.intro}</p>
 
             <div className="medical-image-container">
-              <img
+              <Image
                 src={getAssetPath(lvefLabels.images.formula)}
                 alt="LVEF Formula"
                 className="medical-image"
-                style={{ maxWidth: '400px', width: '100%' }}
+                width={400}
+                height={200}
+                loading="lazy"
+                unoptimized
+                style={{ maxWidth: '400px', width: '100%', height: 'auto' }}
               />
             </div>
 
@@ -302,10 +323,14 @@ export default function LVEFPage() {
             <p className="section-subtitle">{lvefLabels.sections.overview.subtitle}</p>
 
             <div className="medical-image-container cropped-image-container">
-              <img
+              <Image
                 src={getAssetPath(lvefLabels.images.coReEcho)}
                 alt="CoReEcho Visualization"
                 className="medical-image cropped-image"
+                width={800}
+                height={400}
+                loading="lazy"
+                unoptimized
               />
               <p className="image-caption">Figure 1: CoReEcho - Echocardiographic Analysis</p>
             </div>
@@ -342,10 +367,14 @@ export default function LVEFPage() {
             <p className="outcome-highlight"><strong>🧠 Outcome:</strong> {lvefLabels.sections.gradcam.outcome}</p>
 
             <div className="medical-image-container cropped-image-container">
-              <img
+              <Image
                 src={getAssetPath(lvefLabels.images.gradCam)}
                 alt="Grad-CAM Visualization"
                 className="medical-image cropped-image"
+                width={800}
+                height={400}
+                loading="lazy"
+                unoptimized
               />
               <p className="image-caption">Figure 2: Gradient-weighted Class Activation Mapping (Grad-CAM)</p>
             </div>
@@ -355,10 +384,14 @@ export default function LVEFPage() {
             <h2>{lvefLabels.sections.results.title}</h2>
 
             <div className="medical-image-container">
-              <img
+              <Image
                 src={getAssetPath(lvefLabels.images.tableExperimental)}
                 alt="Experimental Results"
                 className="medical-image"
+                width={800}
+                height={500}
+                loading="lazy"
+                unoptimized
               />
               <p className="image-caption">Table 1: Comparative Experimental Results</p>
             </div>

@@ -43,7 +43,7 @@ export default function OpenMiraiPage() {
             />
           </div>
 
-          <p className="description">
+          <p className="description" style={{ whiteSpace: 'pre-line' }}>
             {pageLabels.description}
           </p>
 
