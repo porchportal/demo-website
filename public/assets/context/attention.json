@@ -1,8 +1,7 @@
 {
-  "title": "Attention Dot Visualization",
-  "loading": "Loading attention dot visualization...",
+  "title": "Attention Dot Visualization in\nEye-Tracking",
   "subtitle": "A Framework for Enhanced Data Interpretation using AI Super-Resolution",
-  "description": "This visualization demonstrates how attention dots work in eye-tracking technology. Click anywhere on the canvas to simulate eye gaze points.",
+  "description": "The Attention Dot Visualization in Eye-Tracking project introduces an AI-enhanced framework that integrates Real-ESRGAN Super-Resolution with gaze estimation to accurately detect and visualize where users look on the screen using only standard 1080p cameras. By upscaling input images by 4× times scale, the system restores fine eye details critical for prediction, enabling regression models (Linear, Ridge, SVR, Bayesian Ridge, ARD) to achieve superior accuracy (R² > 0.73, MAPE ~52–62) compared to the baseline (R² ~0.34, MAPE >113). This advancement demonstrates that AI-driven super-resolution significantly improves eye-tracking precision while remaining cost-effective, providing a powerful solution for marketing analytics, UI/UX optimization, and real-time attention mapping without the need for specialized hardware.",
   "introduction": {
     "heading": "Introduction"
   },
@@ -20,15 +19,6 @@
     "results": "4. Quantitative Results",
     "projectStatus": "5. Project Status",
     "about": "About"
-  },
-  "controls": {
-    "clearButton": "Clear Canvas",
-    "heatmapButton": "Toggle Heatmap",
-    "dotSizeLabel": "Dot Size:"
-  },
-  "statistics": {
-    "heading": "Statistics",
-    "pointCount": "Total Gaze Points:"
   },
   "executiveSummary": {
     "heading": "1. Executive Summary: The Business Case for AI Enhancement",

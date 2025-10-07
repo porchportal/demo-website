@@ -46,13 +46,13 @@
   position: fixed;
   top: 20px;
   right: 20px;
-  width: 56px;
-  height: 56px;
+  width: 44px;
+  height: 44px;
   background: #667eea;
   border: none;
   border-radius: 50%;
   color: white;
-  font-size: 24px;
+  font-size: 20px;
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
   z-index: 1000;
@@ -136,8 +136,8 @@
 }
 
 .header-image-container {
-  width: clamp(80px, 12vw, 120px);
-  height: clamp(80px, 12vw, 120px);
+  width: clamp(100px, 15vw, 150px);
+  height: clamp(100px, 15vw, 150px);
   flex-shrink: 0;
   position: relative;
 }
@@ -572,11 +572,6 @@ html {
     flex-wrap: wrap;
   }
 
-  .header-image-container {
-    width: 90px;
-    height: 90px;
-  }
-
   .form-input {
     max-width: 100%;
   }
@@ -604,6 +599,39 @@ html {
   }
 }
 
+@media (max-width: 520px) {
+  .title-desktop {
+    display: none;
+  }
+
+  .title-mobile {
+    display: block;
+  }
+
+  .header-content {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .header-text {
+    flex: 1;
+    text-align: left;
+  }
+
+  .header-image-container {
+    width: 120px;
+    height: 120px;
+    margin-left: 15px;
+  }
+
+  .medical-image.cropped-image {
+    width: 100%;
+    max-width: 320px;
+    height: 280px;
+  }
+}
+
 @media (max-width: 480px) {
   .paper-layout {
     padding: 10px;
@@ -611,25 +639,6 @@ html {
 
   .paper-content {
     padding: 20px 15px;
-  }
-
-  .header-content {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .header-image-container {
-    width: 80px;
-    height: 80px;
-    align-self: center;
-  }
-
-  .title-desktop {
-    display: none;
-  }
-
-  .title-mobile {
-    display: block;
   }
 
   .paper-header h1 {

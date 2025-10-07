@@ -471,6 +471,21 @@ html {
   }
 }
 
+@media (max-width: 520px) {
+  .cropped-web-image {
+    width: 100% !important;
+    height: 200px !important;
+  }
+
+  .enhance-scale-image {
+    height: 150px !important;
+  }
+
+  .data-table-image {
+    max-width: 340px !important;
+  }
+}
+
 @media (max-width: 480px) {
   .paper-layout {
     padding: 10px;

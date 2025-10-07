@@ -1,6 +1,6 @@
 {
   "title": "Left Ventricular Ejection Fraction (LVEF)",
-  "titleMobile": "LVEF Calculator",
+  "titleMobile": "LVEF",
   "loading": "Loading LVEF visualization...",
   "subtitle": "Ultrasound-Based Echocardiographic Analysis using CoReEcho with Grad-CAM–Guided Optimization",
   "description": "Left Ventricular Ejection Fraction (LVEF) is a measurement of the percentage of blood leaving your heart each time it contracts.",

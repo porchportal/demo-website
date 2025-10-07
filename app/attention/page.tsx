@@ -9,6 +9,7 @@ import attentionData from '../../public/assets/context/attention.json'
 import './attention.css'
 
 interface AttentionLabels {
+  title: string
   subtitle: string
   description: string
   introduction: {
@@ -117,7 +118,7 @@ export default function AttentionPage() {
           <header className="paper-header">
             <div className="header-content">
               <div className="header-text">
-                <h1>{labels.attentionPage.title}</h1>
+                <h1 style={{ whiteSpace: 'pre-line' }}>{attentionLabels.title}</h1>
                 <p className="paper-subtitle">{attentionLabels.subtitle}</p>
               </div>
             </div>
@@ -160,7 +161,7 @@ export default function AttentionPage() {
                 alt="AI Enhancement Scale Process"
                 width={800}
                 height={200}
-                className="section-image cropped-web-image"
+                className="section-image cropped-web-image enhance-scale-image"
               />
             </div>
 
@@ -246,7 +247,7 @@ export default function AttentionPage() {
                   alt="MAPE Data Table"
                   width={600}
                   height={400}
-                  className="section-image"
+                  className="section-image data-table-image"
                 />
               </div>
 
@@ -256,7 +257,7 @@ export default function AttentionPage() {
                   alt="R-Square Data Table"
                   width={600}
                   height={400}
-                  className="section-image"
+                  className="section-image data-table-image"
                 />
               </div>
             </div>
