@@ -23,19 +23,6 @@ export default function Home() {
     sessionStorage.setItem('heartAnimation', 'start')
   }
 
-  const handleCircularClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    const target = e.currentTarget
-    const rect = target.getBoundingClientRect()
-    const x = e.clientX - rect.left - rect.width / 2
-    const y = e.clientY - rect.top - rect.height / 2
-    const radius = rect.width / 2
-    const distance = Math.sqrt(x * x + y * y)
-
-    if (distance > radius) {
-      e.preventDefault()
-    }
-  }
-
   return (
     <div className="page-content active">
       <div className="container">
@@ -47,20 +34,22 @@ export default function Home() {
           <Link href="/attention" className="nav-button attention-button">
             <span>{labels.mainMenu.buttons.attention}</span>
           </Link>
-          <Link href="/openmirai" className="nav-button image-button" onClick={(e) => handleCircularClick(e, '/openmirai')}>
+          <Link href="/openmirai" className="nav-button image-button">
             <Image
               src={getAssetPath("/assets/images/OpenMirai_logo.png")}
               alt="OpenMirai"
               width={200}
               height={200}
+              priority
             />
           </Link>
-          <Link href="/limayutthaya" className="nav-button image-button" onClick={(e) => handleCircularClick(e, '/limayutthaya')}>
+          <Link href="/limayutthaya" className="nav-button image-button">
             <Image
               src={getAssetPath("/assets/images/LimAyutthaya_logo.jpg")}
               alt="Lim Ayutthaya"
               width={200}
               height={200}
+              priority
             />
           </Link>
         </div>

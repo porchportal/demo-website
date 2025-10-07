@@ -14,12 +14,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        {/* Preload critical images */}
-        <link rel="preload" as="image" href={`${basePath}/assets/images/OpenMirai_logo.png`} />
-        <link rel="preload" as="image" href={`${basePath}/assets/images/LimAyutthaya_logo.jpg`} />
-        <link rel="preload" as="image" href={`${basePath}/assets/image_medical/lvef_3d_.png`} />
-      </head>
       <body>{children}</body>
     </html>
   )
