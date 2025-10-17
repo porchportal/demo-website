@@ -56,7 +56,9 @@
     "formula": "/assets/image_medical/formular.png",
     "dataDemoImage": "/assets/image_medical/data_demo_image.png",
     "dataDemo1Gif": "/assets/image_medical/data_demo_1.gif",
-    "dataDemo2Gif": "/assets/image_medical/data_demo_2.gif"
+    "dataDemo2Gif": "/assets/image_medical/data_demo_2.gif",
+    "importantFrame": "/assets/image_medical/important_frame.png",
+    "camAnalysisDemo": "/assets/image_medical/cam_analysis_demo_3.gif"
   },
   "sections": {
     "objective": {
@@ -103,24 +105,32 @@
       "benefit": "This two-step process enhances feature robustness while reducing overfitting on limited cardiac datasets."
     },
     "gradcam": {
-      "title": "Grad-CAM–Guided Optimization",
-      "intro": "Grad-CAM (Gradient-weighted Class Activation Mapping) was integrated as both an interpretability tool and a feedback optimization mechanism:",
-      "points": [
-        "Interpretability: Visual heatmaps highlight cardiac areas influencing the AI's LVEF estimation (typically the left ventricle and myocardial walls).",
-        "Optimization: Grad-CAM outputs were analyzed to identify non-relevant attention zones (e.g., noise, probe artifacts). This feedback was used to adjust sampling strategy and feature learning, ensuring the AI consistently focuses on physiologically meaningful regions."
-      ],
-      "outcome": "The Grad-CAM–guided model achieved more stable attention and improved correlation with cardiologist assessments."
+      "title": "CAM-Based Visual Explanation and Model Optimization",
+      "intro": "To enhance model interpretability and optimize attention mechanisms, we applied Finer-CAM along with multiple Class Activation Mapping (CAM) techniques from the comprehensive pytorch-grad-cam library. This suite of methods—including Grad-CAM, Layer-CAM, FullGrad, and Finer-CAM—enables fine-grained visualization of neural network decision-making processes across different architectural depths and abstraction levels.",
+      "methodology": {
+        "title": "Implementation and Modifications",
+        "description": "We modified the CAM pipeline to support the fine-tuned UniFormer spatiotemporal feature extractor used in CoReEcho. Layer-specific activation mappings were extracted at multiple network depths to identify which cardiac structures contribute most significantly to LVEF predictions. Finer-CAM, in particular, revealed subtle anatomical features through differential activation analysis, spotting differences that distinguish normal from dysfunctional myocardial regions."
+      },
+      "frameSelection": {
+        "title": "Important Frame Extraction Strategy",
+        "description": "Following CAM analysis, we developed an automated important frame extraction procedure to optimize CoReEcho model configuration. Rather than processing entire echocardiographic sequences uniformly, frames exhibiting high activation magnitudes in diagnostically relevant regions—particularly the endocardial border during systolic contraction—were prioritized. This frame selection strategy reduced computational overhead while preserving critical temporal information necessary for accurate LVEF estimation. Figure X demonstrates representative examples of selected important frames based on peak CAM responses in the left ventricular cavity."
+      },
+      "visualization": {
+        "title": "Dynamic CAM Visualization",
+        "description": "To validate model attention throughout the cardiac cycle, we generated temporal CAM heatmap sequences overlaid on echocardiographic videos (presented as GIF animations). These visualizations confirm that the optimized model consistently focuses on physiologically meaningful structures—the left ventricular walls and septum—during both diastolic filling and systolic ejection phases. Video-based CAM analysis further reveals that attention patterns dynamically track myocardial motion, aligning with known biomechanical behavior."
+      },
+      "outcome": "The integration of advanced CAM techniques not only improved interpretability but also provided quantitative feedback for model refinement. By identifying and emphasizing diagnostically salient frames, the CAM-guided optimization yielded enhanced LVEF prediction accuracy and stronger correlation with expert cardiologist assessments, as demonstrated in the experimental results."
     },
     "results": {
       "title": "Experimental Results",
-      "content": "The experimental evaluation compared multiple model configurations to assess the impact of Grad-CAM–based optimization on AI-assisted echocardiography. The blue-highlighted configuration in the results table represents the baseline setup, corresponding to the original model design described in the paper. This configuration serves as a reference point for subsequent improvements.\n\nAcross all tested configurations, models optimized with Grad-CAM visualization feedback consistently demonstrated superior interpretability and quantitative performance. By integrating Grad-CAM during training, the system gained spatial awareness of diagnostically relevant cardiac regions, allowing more precise feature extraction from the left ventricular area.\n\nAs shown in the green-highlighted row, this optimized configuration achieved the highest performance among all tested setups. It demonstrated improved Left Ventricular Ejection Fraction (LVEF) estimation accuracy, enhanced localization of myocardial motion, and reduced prediction variance compared to the baseline.\n\nQualitatively, Grad-CAM heatmaps confirmed that the optimized model focused on clinically meaningful structures—particularly the endocardial border and interventricular septum—during both systolic and diastolic phases. Supporting evidence is provided through Grad-CAM video visualizations (GIF format), which clearly illustrate attention progression over cardiac cycles. These visual results show that the optimized model dynamically tracks key heart motion patterns more effectively than the baseline.\n\nIn summary, the integration of Grad-CAM not only enhances model interpretability but also yields measurable gains in predictive accuracy. The visualization-guided optimization thus represents a promising pathway for trustworthy and clinically aligned AI-assisted ultrasound analysis."
+      "content": "The experimental evaluation compared multiple model configurations to assess the impact of CAM-based optimization on AI-assisted echocardiography. The blue-highlighted configuration in the results table represents the baseline setup, corresponding to the original CoReEcho model design. This configuration serves as a reference point for subsequent improvements.\n\nAcross all tested configurations, models optimized with CAM analysis feedback—incorporating Grad-CAM, Layer-CAM, FullGrad, and Finer-CAM—consistently demonstrated superior interpretability and quantitative performance. By integrating advanced CAM techniques during model refinement, the system gained enhanced spatial awareness of diagnostically relevant cardiac regions, allowing more precise feature extraction from the left ventricular area and improved attention to physiologically meaningful structures.\n\nAs shown in the green-highlighted row, the CAM-optimized configuration achieved the highest performance among all tested setups. It demonstrated improved Left Ventricular Ejection Fraction (LVEF) estimation accuracy, enhanced localization of myocardial motion patterns, and reduced prediction variance compared to the baseline. The integration of important frame extraction—guided by peak CAM activation responses—further contributed to computational efficiency without sacrificing predictive performance.\n\nQualitatively, multi-method CAM heatmaps confirmed that the optimized model consistently focuses on clinically meaningful structures—particularly the endocardial border, interventricular septum, and left ventricular walls—during both systolic contraction and diastolic filling phases. Supporting evidence is provided through dynamic CAM video visualizations, which clearly illustrate attention progression throughout complete cardiac cycles. These visual results demonstrate that the CAM-guided model dynamically tracks key myocardial motion patterns more effectively than the baseline, with attention patterns aligning closely with known cardiac biomechanics.\n\nIn summary, the integration of advanced CAM analysis techniques not only enhances model interpretability through fine-grained visualization but also yields measurable gains in predictive accuracy and clinical alignment. The CAM-guided optimization framework—combining multiple visualization methods with intelligent frame selection—represents a promising pathway for trustworthy, explainable, and clinically validated AI-assisted ultrasound analysis."
     },
     "impact": {
       "title": "Clinical & Research Impact",
       "points": [
-        "🩺 Clinical Insight: AI visualizations improve physician trust and help validate model reasoning.",
-        "⚙️ Technical Innovation: Grad-CAM integration transforms explainability into an optimization feedback loop.",
-        "🌍 Scalability: Suitable for real-time ultrasound analysis and deployment in hospitals or telehealth systems."
+        "🩺 Clinical Insight: Advanced CAM visualizations improve physician trust and help validate model reasoning through multi-method interpretability.",
+        "⚙️ Technical Innovation: CAM analysis integration transforms explainability into an optimization feedback loop, guiding attention toward clinically relevant cardiac structures.",
+        "🌍 Scalability: Suitable for real-time ultrasound analysis and deployment in hospitals or telehealth systems with intelligent frame selection for computational efficiency."
       ]
     },
     "references": {
@@ -150,6 +160,12 @@
             "name": "Additional GradCAM model",
             "description": "Advanced Explainable AI for computer vision",
             "github": "https://github.com/jacobgil/pytorch-grad-cam?tab=readme-ov-file"
+          },
+          {
+            "name": "Finer-CAM (2025)",
+            "description": "Spotting the Difference Reveals Finer Details for Visual Explanation",
+            "paper": "https://arxiv.org/abs/2501.11309",
+            "github": "https://github.com/Imageomics/Finer-CAM"
           }
         ]
       },

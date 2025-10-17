@@ -41,6 +41,8 @@ interface LVEFLabels {
     dataDemoImage: string
     dataDemo1Gif: string
     dataDemo2Gif: string
+    importantFrame: string
+    camAnalysisDemo: string
   }
   sections: {
     objective: {
@@ -74,7 +76,18 @@ interface LVEFLabels {
     gradcam: {
       title: string
       intro: string
-      points: string[]
+      methodology: {
+        title: string
+        description: string
+      }
+      frameSelection: {
+        title: string
+        description: string
+      }
+      visualization: {
+        title: string
+        description: string
+      }
       outcome: string
     }
     results: {
@@ -356,28 +369,61 @@ export default function LVEFPage() {
             <p className="key-benefit"><strong>Key Benefit:</strong> {lvefLabels.sections.overview.benefit}</p>
           </section>
 
-          <section id="gradcam" className="paper-section">
+          <section id="cam-analysis" className="paper-section">
             <h2>{lvefLabels.sections.gradcam.title}</h2>
             <p>{lvefLabels.sections.gradcam.intro}</p>
-            <ul>
-              {lvefLabels.sections.gradcam.points.map((point, index) => (
-                <li key={index}>{point}</li>
-              ))}
-            </ul>
-            <p className="outcome-highlight"><strong>🧠 Outcome:</strong> {lvefLabels.sections.gradcam.outcome}</p>
 
             <div className="medical-image-container cropped-image-container">
               <Image
                 src={getAssetPath(lvefLabels.images.gradCam)}
-                alt="Grad-CAM Visualization"
+                alt="CAM Visualization"
                 className="medical-image cropped-image"
                 width={800}
                 height={400}
                 loading="lazy"
                 unoptimized
               />
-              <p className="image-caption">Figure 2: Gradient-weighted Class Activation Mapping (Grad-CAM)</p>
+              <p className="image-caption">Figure 2: Class Activation Mapping (CAM) Visualization</p>
             </div>
+
+            <h3>{lvefLabels.sections.gradcam.methodology.title}</h3>
+            <p>{lvefLabels.sections.gradcam.methodology.description}</p>
+
+            <h3>{lvefLabels.sections.gradcam.frameSelection.title}</h3>
+            <p>{lvefLabels.sections.gradcam.frameSelection.description}</p>
+
+            <div className="medical-image-container">
+              <Image
+                src={getAssetPath(lvefLabels.images.importantFrame)}
+                alt="Important Frame Selection"
+                className="medical-image"
+                width={800}
+                height={400}
+                loading="lazy"
+                unoptimized
+                style={{ maxWidth: '800px', width: '100%', height: 'auto' }}
+              />
+              <p className="image-caption">Figure X: Important Frame Selection based on CAM Analysis</p>
+            </div>
+
+            <h3>{lvefLabels.sections.gradcam.visualization.title}</h3>
+            <p>{lvefLabels.sections.gradcam.visualization.description}</p>
+
+            <div className="medical-image-container">
+              <Image
+                src={getAssetPath(lvefLabels.images.camAnalysisDemo)}
+                alt="CAM Analysis Animation"
+                className="medical-image"
+                width={500}
+                height={300}
+                loading="lazy"
+                unoptimized
+                style={{ maxWidth: '500px', width: '60%', height: 'auto' }}
+              />
+              <p className="image-caption">Video: Dynamic CAM Analysis throughout Cardiac Cycle</p>
+            </div>
+
+            <p className="outcome-highlight"><strong>🧠 Outcome:</strong> {lvefLabels.sections.gradcam.outcome}</p>
           </section>
 
           <section id="results" className="paper-section">
@@ -486,9 +532,9 @@ export default function LVEFPage() {
               {lvefLabels.sections.overview.title}
             </a>
             <a
-              href="#gradcam"
-              className={activeSection === 'gradcam' ? 'active' : ''}
-              onClick={(e) => { e.preventDefault(); scrollToSection('gradcam'); }}
+              href="#cam-analysis"
+              className={activeSection === 'cam-analysis' ? 'active' : ''}
+              onClick={(e) => { e.preventDefault(); scrollToSection('cam-analysis'); }}
             >
               {lvefLabels.sections.gradcam.title}
             </a>
