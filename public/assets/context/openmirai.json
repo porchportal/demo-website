@@ -4,8 +4,16 @@
   "description": "All set to teach and scale—on one platform.\nOpenMirai - build a professional‑grade online academy.",
   "websiteUrl": "https://openmirai.com/en/",
   "facebookUrl": "https://www.facebook.com/openmirai/",
+  "instagramUrl": "https://www.instagram.com/openmirai/",
+  "linkedinUrl": "https://www.linkedin.com/company/openmirai/",
+  "lineUrl": "https://line.me/R/ti/p/@825fnomx",
+  "email": "contact@openmirai.com",
   "websiteButton": "Visit our Website",
   "facebookButton": "Visit our Facebook Page",
+  "instagramButton": "Follow us on Instagram",
+  "linkedinButton": "Connect on LinkedIn",
+  "lineButton": "Chat on LINE",
+  "emailButton": "Email Us",
   "infoHeading": "About OpenMirai",
   "info": "OpenMirai is a platform-as-a-service (PaaS) that allows educators, teams, and organizations to create fully branded, customizable online academies — instantly, without writing a single line of code."
 }
